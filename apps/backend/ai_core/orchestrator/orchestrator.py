@@ -1,32 +1,42 @@
-from ai_core.agents.intent_agent import IntentAgent
-from ai_core.agents.knowledge_agent import KnowledgeAgent
-from ai_core.agents.ticket_agent import TicketAgent
-from ai_core.agents.response_agent import ResponseAgent
-from ai_core.agents.human_review_agent import HumanReviewAgent
-
+from ai_core.orchestrator.agent_registry import AgentRegistry
 from ai_core.state.support_state import SupportState
-
+from ai_core.orchestrator.workflow_router import WorkflowRouter
 
 class SupportOrchestrator:
+    """
+    Executes the customer support workflow.
+
+    The orchestrator coordinates agents but does not contain
+    business logic itself.
+    """
 
     def __init__(self):
 
-        self.intent = IntentAgent()
-        self.knowledge = KnowledgeAgent()
-        self.ticket = TicketAgent()
-        self.response = ResponseAgent()
-        self.review = HumanReviewAgent()
+        self.registry = AgentRegistry()
+        self.router = WorkflowRouter()
 
-    async def run(self, state: SupportState):
 
-        state = await self.intent.execute(state)
+    async def run(self, state: SupportState) -> SupportState:
 
-        state = await self.knowledge.execute(state)
+        workflow = [
+            "intent",
+            "knowledge",
+            "ticket",
+            "human_review",
+            "response",
+        ]
 
-        state = await self.ticket.execute(state)
+        for agent_name in workflow:
 
-        state = await self.response.execute(state)
+            state.workflow.current_agent = agent_name
 
-        state = await self.review.execute(state)
+            agent = self.registry.get(agent_name)
+
+            state = await agent.execute(state)
+
+            state.workflow.completed_agents.append(agent_name)
+
+        state.workflow.current_agent = None
+        state.workflow.status = "completed"
 
         return state

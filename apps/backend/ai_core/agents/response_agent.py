@@ -7,10 +7,25 @@ class ResponseAgent(BaseAgent):
 
     async def execute(self, state: SupportState) -> SupportState:
 
+        response = (
+            f"{state.knowledge.answer}\n\n"
+            f"We detected that your request is related to "
+            f"'{state.intent.intent.value}'."
+        )
+
+        if (
+            state.ticket is not None
+            and state.ticket.ticket_required
+        ):
+            response += (
+                f"\n\nA support ticket has been created for you "
+                f"({state.ticket.ticket_id})."
+            )
+
         state.response = ResponseOutput(
-            response=f"Intent detected: {state.intent.intent.value}",
+            response=response,
             tone="professional",
-            confidence=1.0,
+            confidence=0.98,
         )
 
         return state

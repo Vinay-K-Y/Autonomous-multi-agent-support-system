@@ -1,4 +1,9 @@
+from uuid import uuid4
+
+from ai_core.models.customer_request import CustomerRequest
+from ai_core.models.metadata import ProcessingMetadata
 from ai_core.orchestrator.orchestrator import SupportOrchestrator
+from ai_core.state.support_state import SupportState
 
 
 class ChatService:
@@ -7,17 +12,26 @@ class ChatService:
 
         self.orchestrator = SupportOrchestrator()
 
-    async def process(self, message: str):
+    async def process(
+        self,
+        message: str,
+        customer_id: str = "CUST-001",
+        conversation_id: str = "CONV-001",
+    ) -> SupportState:
 
-        state = {
-            "user_query": message,
-            "intent": "",
-            "confidence": 0,
-            "retrieved_documents": [],
-            "ticket_required": False,
-            "ticket_id": "",
-            "final_response": "",
-            "escalation_required": False,
-        }
+        state = SupportState(
 
-        return await self.orchestrator.run(state)
+            request=CustomerRequest(
+                message=message,
+                customer_id=customer_id,
+                conversation_id=conversation_id,
+            ),
+
+            metadata=ProcessingMetadata(
+                request_id=str(uuid4()),
+            ),
+        )
+
+        updated_state = await self.orchestrator.run(state)
+
+        return updated_state
