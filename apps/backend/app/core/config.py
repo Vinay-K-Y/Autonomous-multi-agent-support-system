@@ -2,15 +2,29 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    app_name: str = "Autonomous Multi-Agent Support System"
-    app_version: str = "1.0.0"
-    api_v1_prefix: str = "/api/v1"
-    environment: str = "development"
-    debug: bool = True
+    APP_NAME: str = "Autonomous Multi-Agent Support System"
+    APP_VERSION: str = "0.1.0"
+
+    ENVIRONMENT: str = "development"
+    DEBUG: bool = True
+
+    LLM_PROVIDER: str = "gemini"
+
+    GOOGLE_API_KEY: str = ""
+
+    MODEL_NAME: str = "gemini-2.5-flash"
+
+    TEMPERATURE: float = 0.2
+
+    MAX_TOKENS: int = 500
+
+    MODEL_NAME: str = "gpt-4.1-mini"
+    TEMPERATURE: float = 0.2
+    MAX_TOKENS: int = 500
 
     model_config = SettingsConfigDict(
         env_file=".env",
-        case_sensitive=False,
+        extra="ignore",
     )
 
 

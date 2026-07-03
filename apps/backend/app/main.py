@@ -13,8 +13,8 @@ logger = logging.getLogger(__name__)
 
 
 app = FastAPI(
-    title=settings.app_name,
-    version=settings.app_version,
+    title=settings.APP_NAME,
+    version=settings.APP_VERSION,
 )
 app.include_router(health_router)
 app.middleware("http")(log_requests)
@@ -25,5 +25,6 @@ async def root():
     logger.info("Root endpoint accessed")
 
     return {
-        "message": "Autonomous Multi-Agent Support System Backend"
+        "provider": settings.LLM_PROVIDER,
+        "model": settings.MODEL_NAME,
     }

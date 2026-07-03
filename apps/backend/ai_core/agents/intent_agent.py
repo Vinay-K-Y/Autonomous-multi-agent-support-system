@@ -1,25 +1,25 @@
 from ai_core.agents.base_agent import BaseAgent
+from ai_core.llm.service import llm_service
+from ai_core.prompts.intent_prompt import intent_prompt
+from ai_core.models.intent import IntentOutput
 from ai_core.state.support_state import SupportState
 
 
 class IntentAgent(BaseAgent):
 
-    async def execute(self, state: SupportState) -> SupportState:
+    async def execute(
+        self,
+        state: SupportState,
+    ) -> SupportState:
 
-        query = state["user_query"].lower()
+        result = await llm_service.generate_structured(
+            prompt=intent_prompt,
+            output_schema=IntentOutput,
+            variables={
+                "message": state.request.message
+            },
+        )
 
-        if "refund" in query:
-            state["intent"] = "refund"
-
-        elif "payment" in query:
-            state["intent"] = "billing"
-
-        elif "broken" in query or "damaged" in query:
-            state["intent"] = "technical"
-
-        else:
-            state["intent"] = "general"
-
-        state["confidence"] = 0.85
+        state.intent = result
 
         return state
