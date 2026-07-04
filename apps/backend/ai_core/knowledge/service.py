@@ -9,19 +9,36 @@ from ai_core.knowledge.vector_store import VectorStoreService
 
 class KnowledgeService:
     """
-    Complete RAG pipeline.
+    Singleton Knowledge Service.
 
-    Loads the knowledge base, creates embeddings,
-    builds the vector store, and exposes a search API.
+    Loads and indexes the knowledge base only once.
     """
 
+    _instance = None
+    _initialized = False
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+
+        return cls._instance
+
     def __init__(self):
+
+        if self._initialized:
+            return
+
+        print("Loading Knowledge Base...")
 
         loader = KnowledgeLoader()
         documents = loader.load()
 
+        print(f"Loaded {len(documents)} documents")
+
         chunker = KnowledgeChunker()
         chunks = chunker.split(documents)
+
+        print(f"Generated {len(chunks)} chunks")
 
         embedding = EmbeddingService().get()
 
@@ -32,5 +49,10 @@ class KnowledgeService:
 
         self.retriever = RetrieverService(vector_store)
 
+        self._initialized = True
+
+        print("Knowledge Service Ready!")
+
     def search(self, query: str) -> list[Document]:
+
         return self.retriever.retrieve(query)
