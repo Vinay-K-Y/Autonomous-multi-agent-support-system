@@ -25,3 +25,5 @@ class SupportState(BaseModel):
     human_review: HumanReview = HumanReview()
 
     workflow: WorkflowContext = WorkflowContext()
+
+    conversation_history: str = ""

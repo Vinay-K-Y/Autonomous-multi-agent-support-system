@@ -1,5 +1,6 @@
 from langgraph.graph import StateGraph, START, END
 
+from ai_core.agents.memory_agent import MemoryAgent
 from ai_core.graph.nodes import (
     intent_node,
     knowledge_node,
@@ -14,13 +15,15 @@ engine = DecisionEngine()
 
 graph = StateGraph(SupportState)
 
+graph.add_node("memory", MemoryAgent().run)
 graph.add_node("intent", intent_node)
 graph.add_node("knowledge", knowledge_node)
 graph.add_node("ticket", ticket_node)
 graph.add_node("human_review", human_review_node)
 graph.add_node("response", response_node)
 
-graph.add_edge(START, "intent")
+graph.add_edge(START, "memory")
+graph.add_edge("memory", "intent")
 
 graph.add_conditional_edges(
     "intent",

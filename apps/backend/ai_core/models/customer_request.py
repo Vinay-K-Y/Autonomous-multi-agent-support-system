@@ -1,4 +1,5 @@
 from typing import List, Optional
+from uuid import uuid4
 
 from pydantic import BaseModel, Field
 
@@ -11,7 +12,7 @@ class CustomerRequest(BaseModel):
 
     customer_id: Optional[str] = None
 
-    conversation_id: Optional[str] = None
+    conversation_id: str = Field(default_factory=lambda: str(uuid4()))
 
     language: str = "en"
 
