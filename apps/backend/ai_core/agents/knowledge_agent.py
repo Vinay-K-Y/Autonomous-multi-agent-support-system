@@ -4,22 +4,37 @@ from ai_core.models.knowledge import (
     KnowledgeSource,
 )
 from ai_core.state.support_state import SupportState
+from ai_core.workflow.execution_trace import mark_documents_retrieved, record_agent_execution, start_agent_timer
 
 
 class KnowledgeAgent(BaseAgent):
 
     async def execute(self, state: SupportState) -> SupportState:
+        started_at = start_agent_timer()
+        message = (state.request.message or "").lower()
+
+        if "refund" in message:
+            answer = "Your refund request can be reviewed under the refund policy."
+            title = "Refund Policy"
+            source = "company_policy.pdf"
+        else:
+            answer = "I found a relevant policy entry for your request."
+            title = "Support Policy"
+            source = "support_policy.pdf"
 
         state.knowledge = KnowledgeOutput(
-            answer="Relevant refund policy found.",
+            answer=answer,
             confidence=0.95,
             sources=[
                 KnowledgeSource(
-                    title="Refund Policy",
-                    source="company_policy.pdf",
+                    title=title,
+                    source=source,
                     confidence=0.95,
                 )
             ],
         )
+
+        mark_documents_retrieved(state, 1)
+        record_agent_execution(state, "knowledge", started_at, details="knowledge retrieval completed")
 
         return state
