@@ -3,11 +3,9 @@ from typing import Any
 
 
 class BaseTool(ABC):
-    """
-    Base class for every tool.
-    """
 
     name: str
+    description: str = ""
 
     @abstractmethod
     def execute(

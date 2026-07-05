@@ -5,7 +5,8 @@ from ai_core.tools.base_tool import BaseTool
 class HumanReviewTool(BaseTool):
 
     name = "human_review"
-
+    description = "Escalates a request to a human agent."
+    
     def execute(
         self,
         required: bool,

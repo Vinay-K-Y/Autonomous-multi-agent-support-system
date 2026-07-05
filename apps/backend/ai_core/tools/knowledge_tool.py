@@ -5,7 +5,8 @@ from ai_core.tools.base_tool import BaseTool
 class KnowledgeTool(BaseTool):
 
     name = "knowledge"
-
+    description = "Searches the company knowledge base."
+    
     def __init__(self):
 
         self.rag = RAGPipeline()

@@ -7,7 +7,8 @@ from ai_core.tools.base_tool import BaseTool
 class TicketTool(BaseTool):
 
     name = "ticket"
-
+    description = "Creates a customer support ticket."
+    
     def execute(
         self,
         priority: str = "medium",
