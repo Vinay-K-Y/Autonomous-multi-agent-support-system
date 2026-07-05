@@ -9,6 +9,9 @@ from ai_core.models.human_review import HumanReview
 from ai_core.models.metadata import ProcessingMetadata
 from ai_core.models.intent import IntentOutput
 from ai_core.models.workflow import WorkflowContext
+from pydantic import Field
+
+from ai_core.models.execution_plan import ExecutionPlan
 
 class SupportState(BaseModel):
 
@@ -27,3 +30,7 @@ class SupportState(BaseModel):
     workflow: WorkflowContext = WorkflowContext()
 
     conversation_history: str = ""
+
+    execution_plan: ExecutionPlan | None = None
+
+    tool_results: dict = Field(default_factory=dict)

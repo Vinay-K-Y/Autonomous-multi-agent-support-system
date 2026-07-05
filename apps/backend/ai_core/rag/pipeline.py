@@ -1,3 +1,5 @@
+from langchain_core.exceptions import OutputParserException
+
 from ai_core.knowledge.loader import KnowledgeLoader
 from ai_core.knowledge.chunker import KnowledgeChunker
 from ai_core.knowledge.embeddings import EmbeddingService
@@ -41,9 +43,16 @@ class RAGPipeline:
             question=question,
         )
 
-        response = self.llm.invoke(prompt)
-
-        return response.content
+        try:
+            response = self.llm.invoke(prompt)
+            return response.content
+        except Exception:
+            if context:
+                return (
+                    "I found relevant information in the knowledge base. "
+                    f"Here is the most relevant context:\n{context}"
+                )
+            return "I’m unable to reach the language model right now, but I can still help based on the available knowledge base."
 
     def get_context(self, query: str) -> str:
 

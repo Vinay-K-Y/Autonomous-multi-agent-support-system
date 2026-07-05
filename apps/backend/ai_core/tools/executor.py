@@ -1,3 +1,4 @@
+import inspect
 from typing import Any
 
 from ai_core.models.execution_plan import ExecutionPlan
@@ -16,8 +17,21 @@ class ToolExecutor:
     ) -> Any:
 
         tool = tool_registry.get(tool_name)
+        method = getattr(tool, "execute")
+        signature = inspect.signature(method)
 
-        return tool.execute(**kwargs)
+        normalized_kwargs = {}
+        for name, parameter in signature.parameters.items():
+            if name == "self":
+                continue
+            if name in kwargs:
+                normalized_kwargs[name] = kwargs[name]
+            elif name == "question" and "query" in kwargs:
+                normalized_kwargs[name] = kwargs["query"]
+            elif name == "conversation" and "conversation_id" in kwargs:
+                normalized_kwargs[name] = kwargs["conversation_id"]
+
+        return tool.execute(**normalized_kwargs)
 
     def execute_plan(
         self,
