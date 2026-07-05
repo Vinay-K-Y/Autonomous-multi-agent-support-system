@@ -11,6 +11,9 @@ class LLMService:
     def __init__(self):
         self.provider = LLMFactory.create()
 
+    def get(self):
+        return self.provider.model
+
     async def generate_structured(
         self,
         prompt: ChatPromptTemplate,

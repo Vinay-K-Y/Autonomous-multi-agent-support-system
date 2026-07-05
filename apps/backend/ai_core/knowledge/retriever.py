@@ -15,3 +15,6 @@ class RetrieverService:
 
     def retrieve(self, query: str) -> list[Document]:
         return self.retriever.invoke(query)
+
+    def search(self, query: str) -> list[Document]:
+        return self.retrieve(query)

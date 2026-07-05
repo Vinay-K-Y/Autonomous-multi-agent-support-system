@@ -1,17 +1,26 @@
-from langchain_community.vectorstores import FAISS
+from langchain_chroma import Chroma
 
 
 class VectorStoreService:
 
-    def __init__(self):
-        self.vector_store = None
+    def build(
+        self,
+        documents,
+        embeddings,
+    ):
 
-    def build(self, documents, embedding_model):
-        self.vector_store = FAISS.from_documents(
-            documents,
-            embedding_model
+        return Chroma.from_documents(
+            documents=documents,
+            embedding=embeddings,
+            persist_directory="chroma_db",
         )
-        return self.vector_store
 
-    def get(self):
-        return self.vector_store
+    def load(
+        self,
+        embeddings,
+    ):
+
+        return Chroma(
+            persist_directory="chroma_db",
+            embedding_function=embeddings,
+        )
