@@ -1,10 +1,12 @@
+from ai_core.observability.decorators import traced
 from ai_core.workflow.decision_engine import DecisionEngine
 from ai_core.state import SupportState
 
 engine = DecisionEngine()
 
 
-def decision_node(
+@traced("decision")
+async def decision_node(
     state: SupportState,
 ) -> SupportState:
 

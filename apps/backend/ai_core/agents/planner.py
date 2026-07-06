@@ -1,3 +1,4 @@
+from ai_core.observability.decorators import traced
 from ai_core.planner.planner import PlannerAgent
 from ai_core.state import SupportState
 
@@ -5,6 +6,7 @@ from ai_core.state import SupportState
 planner = PlannerAgent()
 
 
+@traced("planner")
 async def planner_node(
     state: SupportState,
 ) -> SupportState:

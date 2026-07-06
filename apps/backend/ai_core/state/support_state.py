@@ -12,6 +12,7 @@ from ai_core.models.workflow import WorkflowContext
 from pydantic import Field
 from ai_core.models.decision import DecisionResult
 from ai_core.models.execution_plan import ExecutionPlan
+from ai_core.observability.models import WorkflowTrace
 
 class SupportState(BaseModel):
 
@@ -28,6 +29,8 @@ class SupportState(BaseModel):
     human_review: HumanReview = HumanReview()
 
     workflow: WorkflowContext = WorkflowContext()
+
+    trace: WorkflowTrace | None = None
 
     conversation_history: str = ""
 

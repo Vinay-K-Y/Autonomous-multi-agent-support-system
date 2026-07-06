@@ -42,6 +42,10 @@ def planner_node_sync(state: SupportState) -> SupportState:
     return _run_async(planner_node, state)
 
 
+def decision_node_sync(state: SupportState) -> SupportState:
+    return _run_async(decision_node, state)
+
+
 def tool_executor_node_sync(state: SupportState) -> SupportState:
     return _run_async(tool_executor_node, state)
 
@@ -65,7 +69,7 @@ def response_node_sync(state: SupportState) -> SupportState:
 graph.add_node("memory", memory_node)
 graph.add_node("intent", intent_node_sync)
 graph.add_node("planner", planner_node_sync)
-graph.add_node("decision", decision_node)
+graph.add_node("decision", decision_node_sync)
 graph.add_node("tool_executor", tool_executor_node_sync)
 graph.add_node("knowledge", knowledge_node_sync)
 graph.add_node("ticket", ticket_node_sync)
