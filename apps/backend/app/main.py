@@ -4,7 +4,7 @@ from app.routers.health import router as health_router
 from app.core.config import settings
 from app.core.logging import setup_logging
 import logging
-from app.routers.chat import router as chat_router
+from app.routers.support import router as support_router
 
 
 setup_logging()
@@ -18,7 +18,7 @@ app = FastAPI(
 )
 app.include_router(health_router)
 app.middleware("http")(log_requests)
-app.include_router(chat_router)
+app.include_router(support_router)
 
 @app.get("/")
 async def root():
