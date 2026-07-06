@@ -10,7 +10,7 @@ from ai_core.models.metadata import ProcessingMetadata
 from ai_core.models.intent import IntentOutput
 from ai_core.models.workflow import WorkflowContext
 from pydantic import Field
-
+from ai_core.models.decision import DecisionResult
 from ai_core.models.execution_plan import ExecutionPlan
 
 class SupportState(BaseModel):
@@ -32,5 +32,5 @@ class SupportState(BaseModel):
     conversation_history: str = ""
 
     execution_plan: ExecutionPlan | None = None
-
+    decision: DecisionResult | None = None
     tool_results: dict = Field(default_factory=dict)

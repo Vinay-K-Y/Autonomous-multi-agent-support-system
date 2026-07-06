@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from ai_core.models.decision import DecisionResult
 from ai_core.state.support_state import SupportState
 from ai_core.workflow.execution_trace import (
     increment_llm_calls,
@@ -59,6 +60,13 @@ class DecisionEngine:
             return True, f"Confidence {confidence:.2f} is below the escalation threshold {self.rules.escalation_threshold:.2f}."
 
         return False, f"Confidence {confidence:.2f} is above the escalation threshold {self.rules.escalation_threshold:.2f}."
+
+    def evaluate(self, state: SupportState) -> DecisionResult:
+        return DecisionResult(
+            approved=True,
+            reasoning="Execution plan approved.",
+            modified_plan=state.execution_plan,
+        )
 
     def record_agent(self, state: SupportState, agent_name: str, *, details: str | None = None, extra: dict | None = None) -> None:
         started_at = start_agent_timer()

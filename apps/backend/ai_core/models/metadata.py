@@ -27,3 +27,9 @@ class ProcessingMetadata(BaseModel):
     llm_call_count: int = 0
 
     execution_trace: dict[str, Any] = Field(default_factory=dict)
+
+    planner_reasoning: str = ""
+
+    decision_reasoning: str = ""
+
+    blocked_tools: list[str] = Field(default_factory=list)

@@ -14,6 +14,7 @@ async def planner_node(
     )
 
     state.execution_plan = plan
+    state.metadata.planner_reasoning = plan.reasoning
     state.metadata.routing_reasons.append("planner completed")
 
     return state

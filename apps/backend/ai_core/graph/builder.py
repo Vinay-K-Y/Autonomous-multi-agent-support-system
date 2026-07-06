@@ -2,6 +2,7 @@ import asyncio
 
 from langgraph.graph import StateGraph, START, END
 
+from ai_core.agents.decision import decision_node
 from ai_core.agents.memory_agent import MemoryAgent
 from ai_core.agents.planner import planner_node
 from ai_core.agents.tool_executor import tool_executor_node
@@ -64,6 +65,7 @@ def response_node_sync(state: SupportState) -> SupportState:
 graph.add_node("memory", memory_node)
 graph.add_node("intent", intent_node_sync)
 graph.add_node("planner", planner_node_sync)
+graph.add_node("decision", decision_node)
 graph.add_node("tool_executor", tool_executor_node_sync)
 graph.add_node("knowledge", knowledge_node_sync)
 graph.add_node("ticket", ticket_node_sync)
@@ -73,7 +75,8 @@ graph.add_node("response", response_node_sync)
 graph.add_edge(START, "memory")
 graph.add_edge("memory", "intent")
 graph.add_edge("intent", "planner")
-graph.add_edge("planner", "tool_executor")
+graph.add_edge("planner", "decision")
+graph.add_edge("decision", "tool_executor")
 graph.add_edge("tool_executor", "response")
 graph.add_edge("response", END)
 

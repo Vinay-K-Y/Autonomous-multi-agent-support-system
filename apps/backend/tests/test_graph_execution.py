@@ -23,3 +23,7 @@ async def test_graph_execution():
     print(result)
 
     assert result is not None
+    assert result.execution_plan is not None
+    assert result.decision is not None
+    assert result.decision.approved
+    assert result.tool_results is not None

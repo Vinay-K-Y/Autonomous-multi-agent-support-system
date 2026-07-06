@@ -10,6 +10,17 @@ class ResponseAgent(BaseAgent):
 
     async def execute(self, state: SupportState) -> SupportState:
         started_at = start_agent_timer()
+        decision = state.decision
+
+        if decision is not None and not decision.approved:
+            state.response = ResponseOutput(
+                response=decision.reasoning,
+                confidence=1.0,
+                tone="professional",
+            )
+            record_agent_execution(state, "response", started_at, details="decision blocked response")
+            return state
+
         intent_label = state.intent.intent.value if state.intent is not None else "general_query"
         confidence = 0.0
 

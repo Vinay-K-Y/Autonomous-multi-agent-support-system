@@ -18,6 +18,16 @@ class GeminiProvider(BaseLLMProvider):
             temperature=settings.TEMPERATURE,
         )
 
+    async def generate(
+        self,
+        prompt: str,
+    ) -> str:
+        try:
+            response = await self.model.ainvoke(prompt)
+            return getattr(response, "content", str(response))
+        except Exception:
+            return "I’m unable to reach the language model right now, but I can still help."
+
     async def generate_structured(
         self,
         prompt: ChatPromptTemplate,

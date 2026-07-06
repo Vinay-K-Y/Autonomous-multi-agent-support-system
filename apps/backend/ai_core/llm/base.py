@@ -18,3 +18,13 @@ class BaseLLMProvider(ABC):
         Generate validated structured output from an LLM.
         """
         pass
+
+    @abstractmethod
+    async def generate(
+        self,
+        prompt: str,
+    ) -> str:
+        """
+        Generate plain-text output from an LLM.
+        """
+        pass

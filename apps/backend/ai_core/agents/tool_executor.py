@@ -10,9 +10,15 @@ def tool_executor_node(
     if state.execution_plan is None:
         return state
 
-    results = tool_executor.execute_plan(
-        state.execution_plan
-    )
+    if state.decision is None:
+        return state
+
+    if not state.decision.approved:
+        return state
+
+    plan = state.decision.modified_plan or state.execution_plan
+
+    results = tool_executor.execute_plan(plan)
 
     state.tool_results = results
     state.metadata.routing_reasons.append("tools executed")
