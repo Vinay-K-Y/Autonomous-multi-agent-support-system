@@ -1,4 +1,5 @@
 from langchain_chroma import Chroma
+import os
 
 
 class VectorStoreService:
@@ -19,8 +20,11 @@ class VectorStoreService:
         self,
         embeddings,
     ):
-
-        return Chroma(
-            persist_directory="chroma_db",
-            embedding_function=embeddings,
-        )
+        # Load existing vector store from disk instead of rebuilding
+        if os.path.exists("chroma_db"):
+            return Chroma(
+                persist_directory="chroma_db",
+                embedding_function=embeddings,
+            )
+        # Fallback to building if doesn't exist
+        return None

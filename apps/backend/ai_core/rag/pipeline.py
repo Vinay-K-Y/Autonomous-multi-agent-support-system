@@ -1,10 +1,6 @@
 from langchain_core.exceptions import OutputParserException
 
-from ai_core.knowledge.loader import KnowledgeLoader
-from ai_core.knowledge.chunker import KnowledgeChunker
-from ai_core.knowledge.embeddings import EmbeddingService
-from ai_core.knowledge.vector_store import VectorStoreService
-from ai_core.knowledge.retriever import RetrieverService
+from ai_core.knowledge.service import KnowledgeService
 from ai_core.llm.service import LLMService
 from ai_core.prompts.rag_prompt import RAG_PROMPT
 
@@ -12,26 +8,12 @@ from ai_core.prompts.rag_prompt import RAG_PROMPT
 class RAGPipeline:
 
     def __init__(self):
-
-        loader = KnowledgeLoader()
-        docs = loader.load()
-
-        chunker = KnowledgeChunker()
-        chunks = chunker.split(docs)
-
-        embedding = EmbeddingService().get()
-
-        store = VectorStoreService().build(
-            chunks,
-            embedding,
-        )
-
-        self.retriever = RetrieverService(store)
+        # Use singleton KnowledgeService to avoid reloading on each request
+        self.knowledge_service = KnowledgeService()
         self.llm = LLMService().get()
 
     def search(self, query: str):
-
-        return self.retriever.search(query)
+        return self.knowledge_service.search(query)
 
     def ask(self, question: str, conversation: str = ""):
 
@@ -52,7 +34,7 @@ class RAGPipeline:
                     "I found relevant information in the knowledge base. "
                     f"Here is the most relevant context:\n{context}"
                 )
-            return "I’m unable to reach the language model right now, but I can still help based on the available knowledge base."
+            return "I'm unable to reach the language model right now, but I can still help based on the available knowledge base."
 
     def get_context(self, query: str) -> str:
 

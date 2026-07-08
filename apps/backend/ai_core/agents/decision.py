@@ -1,6 +1,6 @@
 from ai_core.observability.decorators import traced
 from ai_core.workflow.decision_engine import DecisionEngine
-from ai_core.state import SupportState
+from ai_core.state.support_state import SupportState
 
 engine = DecisionEngine()
 

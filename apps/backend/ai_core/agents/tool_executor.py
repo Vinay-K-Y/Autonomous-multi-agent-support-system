@@ -1,5 +1,5 @@
 from ai_core.observability.decorators import traced
-from ai_core.state import SupportState
+from ai_core.state.support_state import SupportState
 
 from ai_core.tools.executor import tool_executor
 

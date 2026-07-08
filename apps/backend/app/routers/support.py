@@ -1,45 +1,36 @@
 from fastapi import APIRouter
 
-from app.models.chat import ChatRequest, ChatResponse
-from app.services.chat_service import ChatService
+from app.schemas.request import SupportRequest
 
-router = APIRouter(prefix="/chat", tags=["Chat"])
+from app.schemas.response import SupportResponse
 
-service = ChatService()
+from app.services.support_service import SupportService
+
+router = APIRouter(
+    prefix="/api/v1/support",
+    tags=["Support"],
+)
+
+service = SupportService()
 
 
-@router.post("", response_model=ChatResponse)
-async def chat(request: ChatRequest):
+@router.post(
+    "",
+    response_model=SupportResponse,
+)
+def process_support_request(
+    request: SupportRequest,
+):
 
-    state = await service.process(
+    return service.process_request(
+
         message=request.message,
-    )
 
-    return ChatResponse(
-        intent=state.intent.intent.value if state.intent else "",
-        confidence=state.intent.confidence if state.intent else 0.0,
+        customer_id=request.customer_id,
 
-        ticket_required=(
-            state.ticket.ticket_required
-            if state.ticket
-            else False
-        ),
+        conversation_id=request.conversation_id,
 
-        ticket_id=(
-            state.ticket.ticket_id
-            if state.ticket
-            else None
-        ),
+        language=request.language,
 
-        response=(
-            state.response.response
-            if state.response
-            else ""
-        ),
-
-        escalation_required=(
-            state.human_review.required
-            if state.human_review
-            else False
-        ),
+        channel=request.channel,
     )

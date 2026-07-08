@@ -1,6 +1,6 @@
 from ai_core.observability.decorators import traced
 from ai_core.planner.planner import PlannerAgent
-from ai_core.state import SupportState
+from ai_core.state.support_state import SupportState
 
 
 planner = PlannerAgent()

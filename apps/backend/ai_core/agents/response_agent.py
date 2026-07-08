@@ -3,6 +3,8 @@ from ai_core.memory.conversation_manager import conversation_manager
 from ai_core.models.response import ResponseOutput
 from ai_core.state.support_state import SupportState
 from ai_core.workflow.execution_trace import record_agent_execution, start_agent_timer
+from ai_core.llm.service import llm_service
+from ai_core.prompts.response_prompt import response_prompt
 import ai_core.tools
 
 
@@ -27,37 +29,80 @@ class ResponseAgent(BaseAgent):
         if state.intent is not None:
             confidence = state.intent.confidence
 
-        parts = []
         knowledge = state.tool_results.get("knowledge")
         ticket = state.tool_results.get("ticket")
         memory = state.tool_results.get("memory")
 
+        # Build context for LLM synthesis
+        context_parts = []
         if knowledge:
-            parts.append(str(knowledge))
-
-        if ticket:
-            parts.append(f"Ticket created: {ticket.ticket_id}")
-
+            context_parts.append(str(knowledge))
+        
         if memory:
-            parts.append(f"Conversation context: {memory}")
+            context_parts.append(f"Previous conversation: {memory}")
 
-        if not parts:
-            parts.append("I can help with your request.")
+        context = "\n\n".join(context_parts) if context_parts else "No additional context available."
 
-        parts.append(
-            f"We detected that your request is related to '{intent_label}'."
-        )
+        # Generate synthesized response using LLM
+        try:
+            print("=" * 80)
+            print("ResponseAgent - Calling LLM with:")
+            print(f"  user_message: {state.request.message}")
+            print(f"  intent: {intent_label}")
+            print(f"  knowledge_context: {context[:100]}...")
+            print(f"  ticket_id: {ticket.ticket_id if ticket else None}")
+            print("=" * 80)
+            
+            synthesized_response = await llm_service.generate_structured(
+                prompt=response_prompt,
+                output_schema=ResponseOutput,
+                variables={
+                    "user_message": state.request.message,
+                    "intent": intent_label,
+                    "knowledge_context": context,
+                    "ticket_id": ticket.ticket_id if ticket else None,
+                },
+            )
+            
+            print("=" * 80)
+            print("ResponseAgent - LLM returned:")
+            print(f"  synthesized_response: {synthesized_response}")
+            print(f"  synthesized_response.response: {synthesized_response.response}")
+            print("=" * 80)
+            
+            response_text = synthesized_response.response
+        except Exception as e:
+            # Fallback to simple concatenation if LLM fails
+            parts = []
+            if knowledge:
+                parts.append(str(knowledge))
+            if ticket:
+                parts.append(f"Ticket created: {ticket.ticket_id}")
+            if memory:
+                parts.append(f"Conversation context: {memory}")
+            if not parts:
+                parts.append("I can help with your request.")
+            parts.append(f"We detected that your request is related to '{intent_label}'.")
+            response_text = "\n\n".join(parts)
 
         follow_up_actions = []
         if ticket is not None and getattr(ticket, "ticket_required", False):
             follow_up_actions.append("Check your support ticket status.")
 
         state.response = ResponseOutput(
-            response="\n\n".join(parts),
+            response=response_text,
             tone="professional",
             follow_up_actions=follow_up_actions,
             confidence=confidence,
         )
+
+        print("=" * 80)
+        print("ResponseAgent - Generated response_text:")
+        print(response_text)
+        print()
+        print("ResponseAgent - State.response:")
+        print(state.response)
+        print("=" * 80)
 
         conversation_manager.add_user_message(
             state.request.conversation_id,

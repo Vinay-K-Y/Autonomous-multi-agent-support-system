@@ -1,30 +1,26 @@
-from fastapi import FastAPI, Request
-from app.middleware.request_logger import log_requests
-from app.routers.health import router as health_router
-from app.core.config import settings
-from app.core.logging import setup_logging
-import logging
+from fastapi import FastAPI
+
 from app.routers.support import router as support_router
-
-
-setup_logging()
-logger = logging.getLogger(__name__)
-
-
+from app.routers.health import router as health_router
 
 app = FastAPI(
-    title=settings.APP_NAME,
-    version=settings.APP_VERSION,
+    title="Autonomous Multi-Agent Support System",
+    version="1.0.0",
 )
-app.include_router(health_router)
-app.middleware("http")(log_requests)
-app.include_router(support_router)
+
 
 @app.get("/")
 async def root():
-    logger.info("Root endpoint accessed")
-
     return {
-        "provider": settings.LLM_PROVIDER,
-        "model": settings.MODEL_NAME,
+        "message": "Autonomous Multi-Agent Support System API",
+        "version": "1.0.0",
+        "endpoints": {
+            "health": "/health",
+            "support": "/api/v1/support",
+            "docs": "/docs"
+        }
     }
+
+
+app.include_router(health_router)
+app.include_router(support_router)

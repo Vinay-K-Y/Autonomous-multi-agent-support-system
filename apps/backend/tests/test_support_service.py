@@ -6,12 +6,9 @@ def test_support_service():
 
     service = SupportService()
 
-    result = service.process(
+    result = service.process_request(
 
-        SupportRequest(
-
-            message="How do I get a refund?"
-        )
+        message="How do I get a refund?"
     )
 
     assert result.response is not None

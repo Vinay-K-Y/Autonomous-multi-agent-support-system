@@ -1,4 +1,5 @@
 from langchain_core.documents import Document
+import os
 
 from ai_core.knowledge.chunker import KnowledgeChunker
 from ai_core.knowledge.embeddings import EmbeddingService
@@ -30,22 +31,29 @@ class KnowledgeService:
 
         print("Loading Knowledge Base...")
 
-        loader = KnowledgeLoader()
-        documents = loader.load()
-
-        print(f"Loaded {len(documents)} documents")
-
-        chunker = KnowledgeChunker()
-        chunks = chunker.split(documents)
-
-        print(f"Generated {len(chunks)} chunks")
-
         embedding = EmbeddingService().get()
 
-        vector_store = VectorStoreService().build(
-            chunks,
-            embedding,
-        )
+        # Try to load existing vector store from disk first
+        vector_store = VectorStoreService().load(embedding)
+        
+        if vector_store is None:
+            # Only build if doesn't exist
+            loader = KnowledgeLoader()
+            documents = loader.load()
+
+            print(f"Loaded {len(documents)} documents")
+
+            chunker = KnowledgeChunker()
+            chunks = chunker.split(documents)
+
+            print(f"Generated {len(chunks)} chunks")
+
+            vector_store = VectorStoreService().build(
+                chunks,
+                embedding,
+            )
+        else:
+            print("Loaded existing vector store from disk")
 
         self.retriever = RetrieverService(vector_store)
 

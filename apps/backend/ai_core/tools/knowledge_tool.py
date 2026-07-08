@@ -7,9 +7,13 @@ class KnowledgeTool(BaseTool):
     name = "knowledge"
     description = "Searches the company knowledge base."
     
-    def __init__(self):
+    # Singleton RAGPipeline to avoid per-request initialization
+    _rag_pipeline = None
 
-        self.rag = RAGPipeline()
+    def __init__(self):
+        if KnowledgeTool._rag_pipeline is None:
+            KnowledgeTool._rag_pipeline = RAGPipeline()
+        self.rag = KnowledgeTool._rag_pipeline
 
     def execute(
         self,

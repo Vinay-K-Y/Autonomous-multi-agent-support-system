@@ -3,33 +3,18 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class TicketResponse(BaseModel):
-
-    ticket_required: bool
-
-    ticket_id: Optional[str] = None
-
-    priority: Optional[str] = None
-
-    assigned_team: Optional[str] = None
-
-
 class SupportResponse(BaseModel):
-
-    workflow_id: str
 
     conversation_id: str
 
     response: str
 
+    intent: Optional[str]
+
     confidence: float
 
-    intent: Optional[str] = None
+    ticket_id: Optional[str]
 
-    ticket: Optional[TicketResponse] = None
+    requires_human_review: bool
 
-    planner_used: bool
-
-    knowledge_used: bool
-
-    human_review_required: bool
+    processing_time_ms: float

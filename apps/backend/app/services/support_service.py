@@ -1,94 +1,83 @@
-import uuid
+from app.schemas.response import SupportResponse
 
-from ai_core.graph.builder import support_graph
-
-from ai_core.models.customer_request import CustomerRequest
-from ai_core.models.metadata import ProcessingMetadata
-from ai_core.state.support_state import SupportState
-
-from app.schemas.request import SupportRequest
-from app.schemas.response import SupportResponse, TicketResponse
+from app.services.workflow_executor import WorkflowExecutor
 
 
 class SupportService:
-    """
-    Main entry point for all customer support requests.
 
-    Converts API DTOs into SupportState,
-    executes the LangGraph workflow,
-    converts the result back into API DTOs.
-    """
+    def __init__(self):
 
-    def process(self, request: SupportRequest) -> SupportResponse:
+        self.executor = WorkflowExecutor()
 
-        workflow_id = str(uuid.uuid4())
+    def process_request(
 
-        conversation_id = (
-            request.conversation_id
-            or str(uuid.uuid4())
-        )
+        self,
 
-        state = SupportState(
+        message: str,
 
-            request=CustomerRequest(
+        customer_id: str | None = None,
 
-                message=request.message,
+        conversation_id: str | None = None,
 
-                customer_id=request.customer_id,
+        language: str = "en",
 
-                conversation_id=conversation_id,
+        channel: str = "web",
+    ):
 
-                language=request.language,
+        state = self.executor.execute(
 
-                channel=request.channel,
+            message=message,
 
-                metadata=request.metadata,
-            ),
-
-            metadata=ProcessingMetadata(
-
-                request_id=workflow_id,
-            ),
-        )
-
-        result = support_graph.invoke(state)
-
-        ticket = None
-
-        if result.ticket:
-
-            ticket = TicketResponse(
-
-                ticket_required=result.ticket.ticket_required,
-
-                ticket_id=result.ticket.ticket_id,
-
-                priority=result.ticket.priority,
-
-                assigned_team=result.ticket.assigned_team,
-            )
-
-        return SupportResponse(
-
-            workflow_id=workflow_id,
+            customer_id=customer_id,
 
             conversation_id=conversation_id,
 
-            response=result.response.response,
+            language=language,
 
-            confidence=result.response.confidence,
+            channel=channel,
+        )
+
+        print("=" * 80)
+        print("SupportService - Final state.response:")
+        print(state.response)
+        print()
+        print("SupportService - state.response.response:")
+        print(state.response.response if state.response else "state.response is None")
+        print("=" * 80)
+
+        return SupportResponse(
+
+            conversation_id=state.request.conversation_id,
+
+            response=state.response.response,
 
             intent=(
-                result.intent.intent.value
-                if result.intent
+                state.intent.intent.value
+                if state.intent
                 else None
             ),
 
-            ticket=ticket,
+            confidence=(
+                state.response.confidence
+                if state.response
+                else 0
+            ),
 
-            planner_used=result.execution_plan is not None,
+            ticket_id=(
+                state.ticket.ticket_id
+                if state.ticket
+                else (
+                    state.tool_results.get("ticket").ticket_id
+                    if state.tool_results and state.tool_results.get("ticket")
+                    else None
+                )
+            ),
 
-            knowledge_used="knowledge" in result.tool_results,
+            requires_human_review=(
+                state.human_review.required
+            ),
 
-            human_review_required=result.human_review.required,
+            processing_time_ms=(
+                state.metadata.processing_time_ms
+            ),
         )

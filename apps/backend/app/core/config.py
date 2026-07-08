@@ -18,10 +18,6 @@ class Settings(BaseSettings):
 
     MAX_TOKENS: int = 500
 
-    MODEL_NAME: str = "gpt-4.1-mini"
-    TEMPERATURE: float = 0.2
-    MAX_TOKENS: int = 500
-
     model_config = SettingsConfigDict(
         env_file=".env",
         extra="ignore",

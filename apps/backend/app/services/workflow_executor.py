@@ -1,12 +1,49 @@
-from ai_core.observability.observability import observability
+import time
+import uuid
 
+from ai_core.graph import support_graph
 
-class WorkflowService:
+from ai_core.state.support_state import SupportState
 
-    def latest_trace(self):
+from ai_core.models.customer_request import CustomerRequest
+from ai_core.models.metadata import ProcessingMetadata
+from ai_core.graph import invoke_sync
 
-        return observability.get_latest_trace()
+class WorkflowExecutor:
 
-    def all_traces(self):
+    def execute(
+        self,
+        message: str,
+        customer_id: str | None = None,
+        conversation_id: str | None = None,
+        language: str = "en",
+        channel: str = "web",
+    ):
 
-        return observability.get_all_traces()
+        if conversation_id is None:
+            conversation_id = str(uuid.uuid4())
+
+        state = SupportState(
+
+            request=CustomerRequest(
+                message=message,
+                customer_id=customer_id,
+                conversation_id=conversation_id,
+                language=language,
+                channel=channel,
+            ),
+
+            metadata=ProcessingMetadata(
+                request_id=str(uuid.uuid4()),
+            ),
+        )
+
+        start = time.perf_counter()
+
+        result = invoke_sync(state)
+
+        elapsed = (time.perf_counter() - start) * 1000
+
+        result.metadata.processing_time_ms = elapsed
+
+        return result

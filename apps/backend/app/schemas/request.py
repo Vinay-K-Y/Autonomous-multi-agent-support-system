@@ -4,14 +4,10 @@ from pydantic import BaseModel, Field
 
 
 class SupportRequest(BaseModel):
-    """
-    Incoming support request received by the API.
-    """
-
     message: str = Field(
-        ...,
+        min_length=1,
+        max_length=5000,
         description="Customer support message",
-        examples=["How do I get a refund?"],
     )
 
     customer_id: Optional[str] = None
@@ -21,5 +17,3 @@ class SupportRequest(BaseModel):
     language: str = "en"
 
     channel: str = "web"
-
-    metadata: dict = Field(default_factory=dict)
