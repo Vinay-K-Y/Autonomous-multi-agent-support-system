@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: support_system_db
+    environment:
+      POSTGRES_USER: support_user
+      POSTGRES_PASSWORD: support_password
+      POSTGRES_DB: support_system
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U support_user -d support_system"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - support_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: support_system_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - support_network
+
+  backend:
+    build: .
+    container_name: support_system_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://support_user:support_password@postgres:5432/support_system
+      - REDIS_URL=redis://redis:6379/0
+      - OPENAI_BASE_URL=http://host.docker.internal:11434/v1
+      - OPENAI_API_KEY=ollama
+      - MODEL_NAME=llama3
+      - LLM_PROVIDER=openai
+    volumes:
+      - ./app:/app/app
+      - ./ai_core:/app/ai_core
+      - ./logs:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - support_network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  support_network:
+    driver: bridge
