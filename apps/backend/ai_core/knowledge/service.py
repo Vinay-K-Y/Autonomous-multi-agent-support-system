@@ -33,6 +33,13 @@ class KnowledgeService:
 
         embedding = EmbeddingService().get()
 
+        if embedding is None:
+            print("Warning: Embeddings not available. Knowledge base search will be disabled.")
+            self.retriever = None
+            self._initialized = True
+            print("Knowledge Service Ready! (Search disabled)")
+            return
+
         # Try to load existing vector store from disk first
         vector_store = VectorStoreService().load(embedding)
         
@@ -62,5 +69,7 @@ class KnowledgeService:
         print("Knowledge Service Ready!")
 
     def search(self, query: str) -> list[Document]:
-
+        if self.retriever is None:
+            print("Warning: Knowledge search not available (embeddings disabled)")
+            return []
         return self.retriever.retrieve(query)

@@ -3,11 +3,13 @@ from ai_core.models.ticket import TicketOutput
 from ai_core.state.support_state import SupportState
 from ai_core.tools.executor import tool_executor
 from ai_core.workflow.execution_trace import record_agent_execution, start_agent_timer
+from ai_core.error_handling import with_fallback, TICKET_FALLBACK
 import ai_core.tools
 
 
 class TicketAgent(BaseAgent):
 
+    @with_fallback("ticket_agent", TICKET_FALLBACK)
     async def execute(self, state: SupportState) -> SupportState:
         started_at = start_agent_timer()
         intent_value = state.intent.intent.value if state.intent is not None else None

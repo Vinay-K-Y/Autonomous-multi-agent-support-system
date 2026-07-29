@@ -18,13 +18,7 @@ class SupportOrchestrator:
 
     async def run(self, state: SupportState) -> SupportState:
 
-        workflow = [
-            "intent",
-            "knowledge",
-            "ticket",
-            "human_review",
-            "response",
-        ]
+        workflow = self.router.get_workflow(state)
 
         for agent_name in workflow:
 

@@ -8,6 +8,11 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
+    # Check if it's a SHA-256 hash (for seed data testing)
+    if len(hashed_password) == 64 and all(c in '0123456789abcdef' for c in hashed_password.lower()):
+        import hashlib
+        return hashlib.sha256(plain_password.encode()).hexdigest() == hashed_password
+    # Otherwise use bcrypt
     return pwd_context.verify(plain_password, hashed_password)
 
 

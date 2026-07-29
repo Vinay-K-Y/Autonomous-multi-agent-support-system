@@ -12,6 +12,14 @@ class SupportMapper:
         if ticket is None and state.tool_results:
             ticket = state.tool_results.get("ticket")
 
+        # Handle ticket_id extraction from both dict and object
+        ticket_id = None
+        if ticket:
+            if isinstance(ticket, dict):
+                ticket_id = ticket.get("ticket_id")
+            else:
+                ticket_id = ticket.ticket_id
+
         return SupportResponse(
 
             conversation_id=state.request.conversation_id,
@@ -34,11 +42,7 @@ class SupportMapper:
                 else 0
             ),
 
-            ticket_id=(
-                ticket.ticket_id
-                if ticket
-                else None
-            ),
+            ticket_id=ticket_id,
 
             requires_human_review=(
                 state.human_review.required

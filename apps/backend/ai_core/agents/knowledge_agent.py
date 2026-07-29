@@ -5,10 +5,12 @@ from ai_core.models.knowledge import (
 )
 from ai_core.state.support_state import SupportState
 from ai_core.workflow.execution_trace import mark_documents_retrieved, record_agent_execution, start_agent_timer
+from ai_core.error_handling import with_fallback, KNOWLEDGE_FALLBACK
 
 
 class KnowledgeAgent(BaseAgent):
 
+    @with_fallback("knowledge_agent", KNOWLEDGE_FALLBACK)
     async def execute(self, state: SupportState) -> SupportState:
         started_at = start_agent_timer()
         message = (state.request.message or "").lower()

@@ -94,12 +94,30 @@ class SupportGraphWrapper:
     def invoke(self, state: SupportState) -> SupportState:
         result = self._graph.invoke(state)
         if isinstance(result, dict):
+            # Handle case where response might be a string instead of ResponseOutput
+            if 'response' in result and isinstance(result['response'], str):
+                from ai_core.models.response import ResponseOutput
+                result['response'] = ResponseOutput(
+                    response=result['response'],
+                    tone="professional",
+                    confidence=0.0,
+                    follow_up_actions=[]
+                )
             return SupportState(**result)
         return result
 
     async def ainvoke(self, state: SupportState) -> SupportState:
         result = await self._graph.ainvoke(state)
         if isinstance(result, dict):
+            # Handle case where response might be a string instead of ResponseOutput
+            if 'response' in result and isinstance(result['response'], str):
+                from ai_core.models.response import ResponseOutput
+                result['response'] = ResponseOutput(
+                    response=result['response'],
+                    tone="professional",
+                    confidence=0.0,
+                    follow_up_actions=[]
+                )
             return SupportState(**result)
         return result
 

@@ -51,6 +51,7 @@ services:
       - ./app:/app/app
       - ./ai_core:/app/ai_core
       - ./logs:/app/logs
+      - ./seed_data.py:/app/seed_data.py
     depends_on:
       postgres:
         condition: service_healthy

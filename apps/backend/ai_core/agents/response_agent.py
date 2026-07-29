@@ -5,11 +5,13 @@ from ai_core.state.support_state import SupportState
 from ai_core.workflow.execution_trace import record_agent_execution, start_agent_timer
 from ai_core.llm.service import llm_service
 from ai_core.prompts.response_prompt import response_prompt
+from ai_core.error_handling import with_fallback, RESPONSE_FALLBACK
 import ai_core.tools
 
 
 class ResponseAgent(BaseAgent):
 
+    @with_fallback("response_agent", RESPONSE_FALLBACK)
     async def execute(self, state: SupportState) -> SupportState:
         started_at = start_agent_timer()
         decision = state.decision

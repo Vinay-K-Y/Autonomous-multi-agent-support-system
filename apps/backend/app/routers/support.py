@@ -1,10 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 
 from app.schemas.request import SupportRequest
 
 from app.schemas.response import SupportResponse
 
 from app.services.support_service import SupportService
+from app.middleware.rate_limit import rate_limit_requests
 
 router = APIRouter(
     prefix="/api/v1/support",
@@ -18,19 +19,21 @@ service = SupportService()
     "",
     response_model=SupportResponse,
 )
+@rate_limit_requests(requests=100, period=60)
 def process_support_request(
-    request: SupportRequest,
+    request: Request,
+    support_request: SupportRequest,
 ):
 
     return service.process_request(
 
-        message=request.message,
+        message=support_request.message,
 
-        customer_id=request.customer_id,
+        customer_id=support_request.customer_id,
 
-        conversation_id=request.conversation_id,
+        conversation_id=support_request.conversation_id,
 
-        language=request.language,
+        language=support_request.language,
 
-        channel=request.channel,
+        channel=support_request.channel,
     )
