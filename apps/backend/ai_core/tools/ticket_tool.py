@@ -17,20 +17,11 @@ class TicketTool(BaseTool):
         **kwargs,
     ):
 
-        ticket = TicketOutput(
+        return TicketOutput(
             ticket_required=True,
             ticket_id=f"TKT-{uuid.uuid4().hex[:8].upper()}",
             priority=priority,
             assigned_team="Customer Support",
+            summary=summary,
+            description=description,
         )
-
-        if summary is not None or description is not None:
-            return {
-                "ticket_id": ticket.ticket_id,
-                "status": "OPEN",
-                "summary": summary or "",
-                "description": description or "",
-                "priority": priority,
-            }
-
-        return ticket

@@ -15,6 +15,8 @@ class SupportResponse(BaseModel):
 
     ticket_id: Optional[str]
 
+    ticket_summary: Optional[str] = None
+
     requires_human_review: bool
 
     processing_time_ms: float

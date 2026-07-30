@@ -41,5 +41,5 @@ class SupportStateFactory:
         return SupportState(
             request=request,
             metadata=metadata,
-            conversation_history=conversation_history,
+            conversation_history=conversation_history or "",
         )

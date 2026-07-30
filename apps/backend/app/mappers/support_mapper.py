@@ -12,13 +12,16 @@ class SupportMapper:
         if ticket is None and state.tool_results:
             ticket = state.tool_results.get("ticket")
 
-        # Handle ticket_id extraction from both dict and object
+        # Handle ticket_id/summary extraction from both dict and object
         ticket_id = None
+        ticket_summary = None
         if ticket:
             if isinstance(ticket, dict):
                 ticket_id = ticket.get("ticket_id")
+                ticket_summary = ticket.get("summary")
             else:
                 ticket_id = ticket.ticket_id
+                ticket_summary = ticket.summary
 
         return SupportResponse(
 
@@ -43,6 +46,8 @@ class SupportMapper:
             ),
 
             ticket_id=ticket_id,
+
+            ticket_summary=ticket_summary,
 
             requires_human_review=(
                 state.human_review.required

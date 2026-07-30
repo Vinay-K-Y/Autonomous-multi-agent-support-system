@@ -11,3 +11,7 @@ class TicketOutput(BaseModel):
     priority: str = "low"
 
     assigned_team: Optional[str] = None
+
+    summary: Optional[str] = None
+
+    description: Optional[str] = None
