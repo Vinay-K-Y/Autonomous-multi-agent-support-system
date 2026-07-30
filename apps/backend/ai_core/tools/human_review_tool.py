@@ -9,7 +9,7 @@ class HumanReviewTool(BaseTool):
     
     def execute(
         self,
-        required: bool,
+        required: bool = True,
         reason: str = "",
     ):
 
