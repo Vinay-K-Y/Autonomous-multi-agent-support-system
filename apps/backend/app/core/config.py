@@ -8,6 +8,15 @@ class Settings(BaseSettings):
     ENVIRONMENT: str = "development"
     DEBUG: bool = True
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # Guard against placeholder secret key in production
+        if self.ENVIRONMENT != "development" and self.SECRET_KEY == "your-secret-key-change-in-production":
+            raise ValueError(
+                "SECURITY ERROR: SECRET_KEY is set to the placeholder value 'your-secret-key-change-in-production'. "
+                "This is not safe for production. Please set a secure SECRET_KEY in your environment variables or .env file."
+            )
+
     # LLM Configuration
     LLM_PROVIDER: str = "openai"  # Options: "gemini", "openai"
     GOOGLE_API_KEY: str = ""
