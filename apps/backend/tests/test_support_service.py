@@ -1,12 +1,13 @@
+import asyncio
 from app.schemas.request import SupportRequest
 from app.services.support_service import SupportService
 
 
-def test_support_service():
+async def test_support_service():
 
     service = SupportService()
 
-    result = service.process_request(
+    result = await service.process_request(
 
         message="How do I get a refund?"
     )
@@ -14,3 +15,8 @@ def test_support_service():
     assert result.response is not None
 
     print(result)
+
+
+def test_support_service_sync():
+    """Sync wrapper for async test"""
+    asyncio.run(test_support_service())

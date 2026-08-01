@@ -42,7 +42,7 @@ class SupportService:
             # 1. Save user message to conversation history
             if conversation_id:
                 if self.use_db_memory and db_session:
-                    await conv_manager.add_user_message(db_session, conversation_id, message)
+                    await conv_manager.add_user_message(conversation_id, message, db_session=db_session)
                 else:
                     conv_manager.add_user_message(conversation_id, message)
 
@@ -50,13 +50,13 @@ class SupportService:
             conversation_history = None
             if conversation_id:
                 if self.use_db_memory and db_session:
-                    history = await conv_manager.history(db_session, conversation_id)
+                    history = await conv_manager.history(conversation_id, db_session=db_session)
                 else:
                     history = conv_manager.history(conversation_id)
                     
                 if history and history.messages:
                     if self.use_db_memory and db_session:
-                        conversation_history = await conv_manager.formatted_history(db_session, conversation_id)
+                        conversation_history = await conv_manager.formatted_history(conversation_id, db_session=db_session)
                     else:
                         conversation_history = conv_manager.formatted_history(conversation_id)
                     logger.debug(f"Loaded conversation history for {conversation_id}: {len(history.messages)} messages")
@@ -77,7 +77,7 @@ class SupportService:
             # 5. Save assistant response to conversation history
             if conversation_id and state.response:
                 if self.use_db_memory and db_session:
-                    await conv_manager.add_assistant_message(db_session, conversation_id, state.response.response)
+                    await conv_manager.add_assistant_message(conversation_id, state.response.response, db_session=db_session)
                 else:
                     conv_manager.add_assistant_message(conversation_id, state.response.response)
 

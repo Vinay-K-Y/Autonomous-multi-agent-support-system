@@ -19,10 +19,12 @@ class ConversationManager:
         self,
         conversation_id: str,
         message: str,
+        db_session: AsyncSession = None,
     ):
-        if self.use_db and self.db_session:
+        session = db_session if db_session is not None else self.db_session
+        if self.use_db and session:
             return conversation_manager_db.add_user_message(
-                self.db_session,
+                session,
                 conversation_id,
                 message,
             )
@@ -39,10 +41,12 @@ class ConversationManager:
         self,
         conversation_id: str,
         message: str,
+        db_session: AsyncSession = None,
     ):
-        if self.use_db and self.db_session:
+        session = db_session if db_session is not None else self.db_session
+        if self.use_db and session:
             return conversation_manager_db.add_assistant_message(
-                self.db_session,
+                session,
                 conversation_id,
                 message,
             )
@@ -58,10 +62,12 @@ class ConversationManager:
     def history(
         self,
         conversation_id: str,
+        db_session: AsyncSession = None,
     ):
-        if self.use_db and self.db_session:
+        session = db_session if db_session is not None else self.db_session
+        if self.use_db and session:
             return conversation_manager_db.history(
-                self.db_session,
+                session,
                 conversation_id,
             )
         else:
@@ -72,10 +78,12 @@ class ConversationManager:
     def formatted_history(
         self,
         conversation_id: str,
+        db_session: AsyncSession = None,
     ) -> str:
-        if self.use_db and self.db_session:
+        session = db_session if db_session is not None else self.db_session
+        if self.use_db and session:
             return conversation_manager_db.formatted_history(
-                self.db_session,
+                session,
                 conversation_id,
             )
         else:

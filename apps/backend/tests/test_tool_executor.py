@@ -75,7 +75,7 @@ async def test_escalation_for_angry_customer():
     
     # Set low confidence intent to trigger escalation
     state.intent = IntentOutput(
-        intent=IntentType.general_query,
+        intent=IntentType.GENERAL,
         confidence=0.65,  # Below default threshold of 0.70
         reasoning="Customer is angry but intent is unclear"
     )
