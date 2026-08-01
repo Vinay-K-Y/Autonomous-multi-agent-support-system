@@ -58,3 +58,45 @@ async def test_tool_executor_node_survives_bad_tool_call():
         "tool execution failed" in reason
         for reason in result.metadata.routing_reasons
     )
+
+
+@pytest.mark.asyncio
+async def test_escalation_for_angry_customer():
+    """Test that angry/frustrated customer messages trigger human review escalation."""
+    from ai_core.models.intent import IntentOutput, IntentType
+    from ai_core.workflow.decision_engine import DecisionEngine
+    from ai_core.workflow.rules import WORKFLOW_RULES
+    
+    # Create state with angry customer message and low confidence intent
+    state = SupportStateFactory.create(
+        message="This is unacceptable, I want to speak to a manager immediately!",
+        customer_id="CUST-002",
+    )
+    
+    # Set low confidence intent to trigger escalation
+    state.intent = IntentOutput(
+        intent=IntentType.general_query,
+        confidence=0.65,  # Below default threshold of 0.70
+        reasoning="Customer is angry but intent is unclear"
+    )
+    
+    # Create execution plan without human_review
+    plan = ExecutionPlan(
+        reasoning="Standard knowledge retrieval",
+        tool_calls=[
+            ToolCall(tool="knowledge", parameters={"question": state.request.message})
+        ]
+    )
+    state.execution_plan = plan
+    
+    # Run decision engine evaluation
+    decision_engine = DecisionEngine(rules=WORKFLOW_RULES)
+    decision = decision_engine.evaluate(state)
+    
+    # Assert that human_review was added to the modified plan
+    assert decision.modified_plan is not None
+    has_human_review = any(
+        tc.tool == "human_review" 
+        for tc in decision.modified_plan.tool_calls
+    )
+    assert has_human_review, "Decision engine should add human_review for low confidence"

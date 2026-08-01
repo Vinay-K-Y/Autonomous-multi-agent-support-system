@@ -33,6 +33,21 @@ class PlannerAgent:
         lowered_query = query.lower()
         tool_calls: list[ToolCall] = []
 
+        # Check for escalation keywords first
+        escalation_keywords = [
+            "angry", "furious", "unacceptable", "manager", "lawyer", "lawsuit", 
+            "cancel my account", "sue", "legal action", "escalate", "supervisor",
+            "disgusting", "terrible", "horrible", "worst"
+        ]
+        
+        if any(keyword in lowered_query for keyword in escalation_keywords):
+            tool_calls.append(
+                ToolCall(
+                    tool="human_review",
+                    parameters={"reason": "Customer expressed frustration or requested escalation"},
+                )
+            )
+
         if any(word in lowered_query for word in ["refund", "return", "cancel", "ticket"]):
             tool_calls.append(
                 ToolCall(

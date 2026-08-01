@@ -62,10 +62,39 @@ class DecisionEngine:
         return False, f"Confidence {confidence:.2f} is above the escalation threshold {self.rules.escalation_threshold:.2f}."
 
     def evaluate(self, state: SupportState) -> DecisionResult:
+        modified_plan = state.execution_plan
+        
+        # Check if escalation is needed as a deterministic backstop
+        should_escalate, escalation_reason = self.should_escalate(state)
+        
+        if should_escalate:
+            # Check if plan already includes human_review
+            has_human_review = any(
+                tc.tool == "human_review" 
+                for tc in modified_plan.tool_calls
+            )
+            
+            if not has_human_review:
+                from ai_core.models.tool_call import ToolCall
+                
+                # Add human_review tool call to the plan
+                escalation_tool = ToolCall(
+                    tool="human_review",
+                    parameters={"reason": escalation_reason}
+                )
+                
+                # Create modified plan with human_review added
+                modified_plan = modified_plan.model_copy(
+                    update={
+                        "tool_calls": modified_plan.tool_calls + [escalation_tool],
+                        "reasoning": f"{modified_plan.reasoning or ''} Added human_review: {escalation_reason}"
+                    }
+                )
+        
         return DecisionResult(
             approved=True,
             reasoning="Execution plan approved.",
-            modified_plan=state.execution_plan,
+            modified_plan=modified_plan,
         )
 
     def record_agent(self, state: SupportState, agent_name: str, *, details: str | None = None, extra: dict | None = None) -> None:
