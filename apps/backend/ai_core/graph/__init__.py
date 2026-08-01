@@ -1,3 +1,3 @@
-from ai_core.graph.builder import support_graph, invoke_sync
+from ai_core.graph.builder import support_graph, invoke_sync, invoke_async
 
-__all__ = ["support_graph", "invoke_sync"]
+__all__ = ["support_graph", "invoke_sync", "invoke_async"]

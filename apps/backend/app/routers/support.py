@@ -20,12 +20,12 @@ service = SupportService()
     response_model=SupportResponse,
 )
 @rate_limit_requests(requests=100, period=60)
-def process_support_request(
+async def process_support_request(
     request: Request,
     support_request: SupportRequest,
 ):
 
-    return service.process_request(
+    return await service.process_request(
 
         message=support_request.message,
 

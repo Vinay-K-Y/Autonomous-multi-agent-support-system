@@ -51,9 +51,13 @@ class ConversationRepository:
         user_id: str = None,
         language: str = "en",
         channel: str = "web",
+        conversation_id: str = None,
     ) -> Conversation:
+        # Use provided conversation_id if available, otherwise generate new UUID
+        conv_id = conversation_id if conversation_id else str(uuid.uuid4())
+        
         conversation = Conversation(
-            id=str(uuid.uuid4()),
+            id=conv_id,
             user_id=user_id,
             customer_id=customer_id,
             language=language,

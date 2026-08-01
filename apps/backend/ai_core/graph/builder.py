@@ -130,3 +130,7 @@ support_graph = SupportGraphWrapper(compiled_graph)
 
 def invoke_sync(state: SupportState):
     return support_graph.invoke(state)
+
+
+def invoke_async(state: SupportState):
+    return support_graph.ainvoke(state)

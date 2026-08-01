@@ -3,6 +3,7 @@ from app.services.workflow_executor import WorkflowExecutor
 from ai_core.factories import SupportStateFactory
 from ai_core.memory.conversation_manager import conversation_manager
 from app.db import AsyncSessionLocal, database_available
+import asyncio
 
 
 class SupportService:
@@ -12,8 +13,9 @@ class SupportService:
         # Use the same singleton conversation_manager that MemoryTool uses
         # This ensures single source of truth for conversation memory
         self.conversation_manager = conversation_manager
+        self.use_db_memory = database_available
 
-    def process_request(
+    async def process_request(
         self,
         message: str,
         customer_id: str | None = None,
@@ -24,34 +26,60 @@ class SupportService:
         # Use the singleton conversation_manager for consistency with MemoryTool
         conv_manager = self.conversation_manager
 
-        # 1. Save user message to conversation history
-        if conversation_id:
-            conv_manager.add_user_message(conversation_id, message)
+        # If using database, get a DB session
+        db_session = None
+        if self.use_db_memory:
+            db_session = AsyncSessionLocal()
+            # Switch conversation manager to DB mode with session
+            from ai_core.memory.conversation_manager import ConversationManager
+            conv_manager = ConversationManager(use_db=True, db_session=db_session)
 
-        # 2. Load conversation history if available
-        conversation_history = None
-        if conversation_id:
-            history = conv_manager.history(conversation_id)
-            if history and history.messages:
-                conversation_history = conv_manager.formatted_history(conversation_id)
-                print(f"Loaded conversation history for {conversation_id}: {len(history.messages)} messages")
+        try:
+            # 1. Save user message to conversation history
+            if conversation_id:
+                if self.use_db_memory and db_session:
+                    await conv_manager.add_user_message(db_session, conversation_id, message)
+                else:
+                    conv_manager.add_user_message(conversation_id, message)
 
-        # 3. Initialize state using the factory with conversation history
-        initial_state = SupportStateFactory.create(
-            message=message,
-            customer_id=customer_id,
-            conversation_id=conversation_id,
-            language=language,
-            channel=channel,
-            conversation_history=conversation_history,
-        )
+            # 2. Load conversation history if available
+            conversation_history = None
+            if conversation_id:
+                if self.use_db_memory and db_session:
+                    history = await conv_manager.history(db_session, conversation_id)
+                else:
+                    history = conv_manager.history(conversation_id)
+                    
+                if history and history.messages:
+                    if self.use_db_memory and db_session:
+                        conversation_history = await conv_manager.formatted_history(db_session, conversation_id)
+                    else:
+                        conversation_history = conv_manager.formatted_history(conversation_id)
+                    print(f"Loaded conversation history for {conversation_id}: {len(history.messages)} messages")
 
-        # 4. Execute the workflow
-        state = self.executor.execute(initial_state)
+            # 3. Initialize state using the factory with conversation history
+            initial_state = SupportStateFactory.create(
+                message=message,
+                customer_id=customer_id,
+                conversation_id=conversation_id,
+                language=language,
+                channel=channel,
+                conversation_history=conversation_history,
+            )
 
-        # 5. Save assistant response to conversation history
-        if conversation_id and state.response:
-            conv_manager.add_assistant_message(conversation_id, state.response.response)
+            # 4. Execute the workflow (make async for DB compatibility)
+            state = await self.executor.execute_async(initial_state)
 
-        # 6. Map the final state directly to the response object
-        return SupportMapper.to_response(state)
+            # 5. Save assistant response to conversation history
+            if conversation_id and state.response:
+                if self.use_db_memory and db_session:
+                    await conv_manager.add_assistant_message(db_session, conversation_id, state.response.response)
+                else:
+                    conv_manager.add_assistant_message(conversation_id, state.response.response)
+
+            # 6. Map the final state directly to the response object
+            return SupportMapper.to_response(state)
+        finally:
+            # Clean up DB session if we created one
+            if db_session:
+                await db_session.close()
