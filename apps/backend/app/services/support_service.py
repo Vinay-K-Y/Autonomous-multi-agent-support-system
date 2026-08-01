@@ -1,9 +1,13 @@
+import logging
+
 from app.mappers import SupportMapper
 from app.services.workflow_executor import WorkflowExecutor
 from ai_core.factories import SupportStateFactory
 from ai_core.memory.conversation_manager import conversation_manager
 from app.db import AsyncSessionLocal, database_available
 import asyncio
+
+logger = logging.getLogger(__name__)
 
 
 class SupportService:
@@ -55,7 +59,7 @@ class SupportService:
                         conversation_history = await conv_manager.formatted_history(db_session, conversation_id)
                     else:
                         conversation_history = conv_manager.formatted_history(conversation_id)
-                    print(f"Loaded conversation history for {conversation_id}: {len(history.messages)} messages")
+                    logger.debug(f"Loaded conversation history for {conversation_id}: {len(history.messages)} messages")
 
             # 3. Initialize state using the factory with conversation history
             initial_state = SupportStateFactory.create(

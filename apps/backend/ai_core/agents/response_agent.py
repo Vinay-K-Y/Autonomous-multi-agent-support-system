@@ -1,3 +1,5 @@
+import logging
+
 from ai_core.agents.base_agent import BaseAgent
 from ai_core.models.response import ResponseOutput
 from ai_core.state.support_state import SupportState
@@ -6,6 +8,8 @@ from ai_core.llm.service import llm_service
 from ai_core.prompts.response_prompt import response_prompt
 from ai_core.error_handling import with_fallback, RESPONSE_FALLBACK
 import ai_core.tools
+
+logger = logging.getLogger(__name__)
 
 
 class ResponseAgent(BaseAgent):
@@ -46,13 +50,13 @@ class ResponseAgent(BaseAgent):
 
         # Generate synthesized response using LLM
         try:
-            print("=" * 80)
-            print("ResponseAgent - Calling LLM with:")
-            print(f"  user_message: {state.request.message}")
-            print(f"  intent: {intent_label}")
-            print(f"  knowledge_context: {context[:100]}...")
-            print(f"  ticket_id: {ticket.ticket_id if ticket else None}")
-            print("=" * 80)
+            logger.debug("=" * 80)
+            logger.debug("ResponseAgent - Calling LLM with:")
+            logger.debug(f"  user_message: {state.request.message}")
+            logger.debug(f"  intent: {intent_label}")
+            logger.debug(f"  knowledge_context: {context[:100]}...")
+            logger.debug(f"  ticket_id: {ticket.ticket_id if ticket else None}")
+            logger.debug("=" * 80)
             
             synthesized_response = await llm_service.generate_structured(
                 prompt=response_prompt,
@@ -65,11 +69,11 @@ class ResponseAgent(BaseAgent):
                 },
             )
             
-            print("=" * 80)
-            print("ResponseAgent - LLM returned:")
-            print(f"  synthesized_response: {synthesized_response}")
-            print(f"  synthesized_response.response: {synthesized_response.response}")
-            print("=" * 80)
+            logger.debug("=" * 80)
+            logger.debug("ResponseAgent - LLM returned:")
+            logger.debug(f"  synthesized_response: {synthesized_response}")
+            logger.debug(f"  synthesized_response.response: {synthesized_response.response}")
+            logger.debug("=" * 80)
             
             response_text = synthesized_response.response
         except Exception as e:
@@ -97,13 +101,13 @@ class ResponseAgent(BaseAgent):
             confidence=confidence,
         )
 
-        print("=" * 80)
-        print("ResponseAgent - Generated response_text:")
-        print(response_text)
-        print()
-        print("ResponseAgent - State.response:")
-        print(state.response)
-        print("=" * 80)
+        logger.debug("=" * 80)
+        logger.debug("ResponseAgent - Generated response_text:")
+        logger.debug(response_text)
+        logger.debug("")
+        logger.debug("ResponseAgent - State.response:")
+        logger.debug(state.response)
+        logger.debug("=" * 80)
 
         # Conversation history saving is handled by SupportService.process_request()
         # to ensure single source of truth for memory management

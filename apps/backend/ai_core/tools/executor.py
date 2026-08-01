@@ -1,8 +1,11 @@
 import inspect
+import logging
 from typing import Any
 
 from ai_core.models.execution_plan import ExecutionPlan
 from ai_core.tools.registry import tool_registry
+
+logger = logging.getLogger(__name__)
 
 
 class ToolExecutor:
@@ -21,11 +24,9 @@ class ToolExecutor:
         signature = inspect.signature(method)
 
         # Debug logging
-        import logging
-        logger = logging.getLogger(__name__)
-        logger.info(f"Executing tool: {tool_name}")
-        logger.info(f"Available kwargs: {kwargs.keys()}")
-        logger.info(f"Method signature: {signature}")
+        logger.debug(f"Executing tool: {tool_name}")
+        logger.debug(f"Available kwargs: {kwargs.keys()}")
+        logger.debug(f"Method signature: {signature}")
 
         normalized_kwargs = {}
         for name, parameter in signature.parameters.items():
