@@ -8,9 +8,6 @@ from ai_core.agents.planner import planner_node
 from ai_core.agents.tool_executor import tool_executor_node
 from ai_core.graph.nodes import (
     intent_node,
-    knowledge_node,
-    ticket_node,
-    human_review_node,
     response_node,
 )
 from ai_core.state.support_state import SupportState
@@ -50,18 +47,6 @@ def tool_executor_node_sync(state: SupportState) -> SupportState:
     return _run_async(tool_executor_node, state)
 
 
-def knowledge_node_sync(state: SupportState) -> SupportState:
-    return _run_async(knowledge_node, state)
-
-
-def ticket_node_sync(state: SupportState) -> SupportState:
-    return _run_async(ticket_node, state)
-
-
-def human_review_node_sync(state: SupportState) -> SupportState:
-    return _run_async(human_review_node, state)
-
-
 def response_node_sync(state: SupportState) -> SupportState:
     return _run_async(response_node, state)
 
@@ -71,9 +56,6 @@ graph.add_node("intent", intent_node_sync)
 graph.add_node("planner", planner_node_sync)
 graph.add_node("decision", decision_node_sync)
 graph.add_node("tool_executor", tool_executor_node_sync)
-graph.add_node("knowledge", knowledge_node_sync)
-graph.add_node("ticket", ticket_node_sync)
-graph.add_node("human_review", human_review_node_sync)
 graph.add_node("response", response_node_sync)
 
 graph.add_edge(START, "memory")
