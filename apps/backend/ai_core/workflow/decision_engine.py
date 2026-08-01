@@ -162,7 +162,7 @@ class DecisionEngine:
             approved=True,
             reasoning="Execution plan approved.",
             modified_plan=modified_plan,
-            blocked_tools=blocked_tools if blocked_tools else None,
+            blocked_tools=blocked_tools,
         )
 
     def record_agent(self, state: SupportState, agent_name: str, *, details: str | None = None, extra: dict | None = None) -> None:
