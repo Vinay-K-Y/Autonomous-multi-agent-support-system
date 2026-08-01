@@ -63,6 +63,7 @@ class DecisionEngine:
 
     def evaluate(self, state: SupportState) -> DecisionResult:
         modified_plan = state.execution_plan
+        blocked_tools = []
         
         # Check if escalation is needed as a deterministic backstop
         should_escalate, escalation_reason = self.should_escalate(state)
@@ -91,10 +92,77 @@ class DecisionEngine:
                     }
                 )
         
+        # Check if ticket creation is needed
+        should_create_ticket, ticket_reason = self.should_create_ticket(state)
+        if should_create_ticket:
+            has_ticket = any(
+                tc.tool == "ticket" 
+                for tc in modified_plan.tool_calls
+            )
+            
+            if not has_ticket:
+                from ai_core.models.tool_call import ToolCall
+                
+                # Add ticket tool call to the plan
+                ticket_tool = ToolCall(
+                    tool="ticket",
+                    parameters={"priority": "medium"}
+                )
+                
+                modified_plan = modified_plan.model_copy(
+                    update={
+                        "tool_calls": modified_plan.tool_calls + [ticket_tool],
+                        "reasoning": f"{modified_plan.reasoning or ''} Added ticket: {ticket_reason}"
+                    }
+                )
+        
+        # Check if knowledge retrieval is needed
+        should_retrieve_knowledge, knowledge_reason = self.should_retrieve_knowledge(state)
+        if should_retrieve_knowledge:
+            has_knowledge = any(
+                tc.tool == "knowledge" 
+                for tc in modified_plan.tool_calls
+            )
+            
+            if not has_knowledge:
+                from ai_core.models.tool_call import ToolCall
+                
+                # Add knowledge tool call to the plan
+                knowledge_tool = ToolCall(
+                    tool="knowledge",
+                    parameters={"question": state.request.message}
+                )
+                
+                modified_plan = modified_plan.model_copy(
+                    update={
+                        "tool_calls": modified_plan.tool_calls + [knowledge_tool],
+                        "reasoning": f"{modified_plan.reasoning or ''} Added knowledge: {knowledge_reason}"
+                    }
+                )
+        
+        # Remove tools that don't apply (conservative approach)
+        # Example: if high confidence general_query, don't need ticket
+        if state.intent and state.intent.confidence > 0.85:
+            if state.intent.intent.value == "general_query":
+                # Remove ticket if present for high-confidence general queries
+                modified_tool_calls = [
+                    tc for tc in modified_plan.tool_calls 
+                    if tc.tool != "ticket"
+                ]
+                if len(modified_tool_calls) < len(modified_plan.tool_calls):
+                    blocked_tools.append("ticket")
+                    modified_plan = modified_plan.model_copy(
+                        update={
+                            "tool_calls": modified_tool_calls,
+                            "reasoning": f"{modified_plan.reasoning or ''} Removed ticket: high confidence general query"
+                        }
+                    )
+        
         return DecisionResult(
             approved=True,
             reasoning="Execution plan approved.",
             modified_plan=modified_plan,
+            blocked_tools=blocked_tools if blocked_tools else None,
         )
 
     def record_agent(self, state: SupportState, agent_name: str, *, details: str | None = None, extra: dict | None = None) -> None:
