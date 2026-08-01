@@ -1,7 +1,7 @@
 from app.mappers import SupportMapper
 from app.services.workflow_executor import WorkflowExecutor
 from ai_core.factories import SupportStateFactory
-from ai_core.memory.conversation_manager import ConversationManager
+from ai_core.memory.conversation_manager import conversation_manager
 from app.db import AsyncSessionLocal, database_available
 
 
@@ -9,21 +9,9 @@ class SupportService:
 
     def __init__(self):
         self.executor = WorkflowExecutor()
-        # Use database-backed conversation manager if database is available
-        self.use_db_memory = database_available
-        self.conversation_manager = None
-
-    def _get_conversation_manager(self):
-        """Get conversation manager instance"""
-        if self.conversation_manager is None:
-            if self.use_db_memory:
-                # Database-backed storage
-                from app.db import get_db
-                self.conversation_manager = ConversationManager(use_db=True, db_session=None)
-            else:
-                # In-memory storage
-                self.conversation_manager = ConversationManager(use_db=False)
-        return self.conversation_manager
+        # Use the same singleton conversation_manager that MemoryTool uses
+        # This ensures single source of truth for conversation memory
+        self.conversation_manager = conversation_manager
 
     def process_request(
         self,
@@ -33,17 +21,8 @@ class SupportService:
         language: str = "en",
         channel: str = "web",
     ):
-        # Get conversation manager
-        conv_manager = self._get_conversation_manager()
-
-        # If using database, we need a session
-        db_session = None
-        if self.use_db_memory:
-            import asyncio
-            # For sync execution, we'll use in-memory for now
-            # In production, this should be async
-            conv_manager = ConversationManager(use_db=False)
-            print("Warning: Database-backed memory not available in sync mode, using in-memory")
+        # Use the singleton conversation_manager for consistency with MemoryTool
+        conv_manager = self.conversation_manager
 
         # 1. Save user message to conversation history
         if conversation_id:

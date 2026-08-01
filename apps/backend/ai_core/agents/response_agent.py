@@ -1,5 +1,4 @@
 from ai_core.agents.base_agent import BaseAgent
-from ai_core.memory.conversation_manager import conversation_manager
 from ai_core.models.response import ResponseOutput
 from ai_core.state.support_state import SupportState
 from ai_core.workflow.execution_trace import record_agent_execution, start_agent_timer
@@ -106,14 +105,8 @@ class ResponseAgent(BaseAgent):
         print(state.response)
         print("=" * 80)
 
-        conversation_manager.add_user_message(
-            state.request.conversation_id,
-            state.request.message,
-        )
-        conversation_manager.add_assistant_message(
-            state.request.conversation_id,
-            state.response.response,
-        )
+        # Conversation history saving is handled by SupportService.process_request()
+        # to ensure single source of truth for memory management
 
         record_agent_execution(state, "response", started_at, details="response generated")
         return state

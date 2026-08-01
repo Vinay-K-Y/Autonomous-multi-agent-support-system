@@ -12,6 +12,8 @@ class MemoryTool(BaseTool):
         conversation_id: str,
     ):
 
+        # Use the same singleton conversation_manager that SupportService uses
+        # This ensures single source of truth for conversation memory
         return conversation_manager.formatted_history(
             conversation_id
         )
