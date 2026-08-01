@@ -1,6 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.repositories import ConversationRepository, MessageRepository
 from typing import List
+from ai_core.memory.models import ConversationHistory
 
 
 class ConversationManagerDB:
@@ -63,19 +64,29 @@ class ConversationManagerDB:
         self,
         db: AsyncSession,
         conversation_id: str,
-    ) -> List:
+    ) -> ConversationHistory:
         messages = await MessageRepository.get_by_conversation(db, conversation_id)
-        return messages
+        # Convert DB Message objects to ConversationMessage objects
+        from ai_core.memory.models import ConversationMessage
+        conversation_messages = [
+            ConversationMessage(role=m.role, content=m.content)
+            for m in messages
+        ]
+        # Return ConversationHistory object to match MemoryStore interface
+        return ConversationHistory(
+            conversation_id=conversation_id,
+            messages=conversation_messages
+        )
 
     async def formatted_history(
         self,
         db: AsyncSession,
         conversation_id: str,
     ) -> str:
-        messages = await self.history(db, conversation_id)
+        history = await self.history(db, conversation_id)
         return "\n".join(
             f"{m.role.upper()}: {m.content}"
-            for m in messages
+            for m in history.messages
         )
 
     async def clear(
