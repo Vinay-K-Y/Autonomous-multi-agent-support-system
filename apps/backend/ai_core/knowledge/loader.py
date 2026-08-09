@@ -20,6 +20,12 @@ class KnowledgeLoader:
 
             loader = TextLoader(str(file), encoding="utf-8")
 
-            documents.extend(loader.load())
+            docs = loader.load()
+            
+            # Add source metadata to each document
+            for doc in docs:
+                doc.metadata["source"] = file.name
+
+            documents.extend(docs)
 
         return documents
