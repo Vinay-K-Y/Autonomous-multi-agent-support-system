@@ -5,18 +5,21 @@ services:
     image: postgres:16-alpine
     container_name: support_system_db
     environment:
-      POSTGRES_USER: support_user
-      POSTGRES_PASSWORD: support_password
+      POSTGRES_USER: ${POSTGRES_USER:-support_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-support_password}
       POSTGRES_DB: support_system
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U support_user -d support_system"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-support_user} -d support_system"]
       interval: 10s
       timeout: 5s
       retries: 5
+    # Add .env file support
+    env_file:
+      - .env
     networks:
       - support_network
 
@@ -41,12 +44,13 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql+asyncpg://support_user:support_password@postgres:5432/support_system
+      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER:-support_user}:${POSTGRES_PASSWORD:-support_password}@postgres:5432/support_system
       - REDIS_URL=redis://redis:6379/0
-      - OPENAI_BASE_URL=http://host.docker.internal:11434/v1
-      - OPENAI_API_KEY=ollama
-      - MODEL_NAME=llama3
-      - LLM_PROVIDER=openai
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL:-http://host.docker.internal:11434/v1}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-ollama}
+      - MODEL_NAME=${MODEL_NAME:-llama3}
+      - LLM_PROVIDER=${LLM_PROVIDER:-openai}
+      - SECRET_KEY=${SECRET_KEY:-your-secret-key-change-in-production}
     volumes:
       - ./app:/app/app
       - ./ai_core:/app/ai_core
@@ -57,6 +61,9 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    # Add .env file support
+    env_file:
+      - .env
     networks:
       - support_network
     extra_hosts:

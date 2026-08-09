@@ -32,6 +32,8 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "postgresql+asyncpg://user:password@localhost:5432/support_system"
     DATABASE_POOL_SIZE: int = 10
     DATABASE_MAX_OVERFLOW: int = 20
+    POSTGRES_USER: str = "support_user"
+    POSTGRES_PASSWORD: str = "support_password"
 
     # Redis Configuration
     REDIS_URL: str = "redis://localhost:6379/0"
