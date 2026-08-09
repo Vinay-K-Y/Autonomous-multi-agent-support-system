@@ -23,9 +23,11 @@ class PlannerAgent:
             )
         except Exception:
             plan = self._fallback_plan(query)
+            plan.used_fallback = True
 
         if not getattr(plan, "tool_calls", None):
             plan = self._fallback_plan(query)
+            plan.used_fallback = True
 
         return plan
 

@@ -3,7 +3,7 @@ import logging
 from ai_core.agents.base_agent import BaseAgent
 from ai_core.models.response import ResponseOutput
 from ai_core.state.support_state import SupportState
-from ai_core.workflow.execution_trace import record_agent_execution, start_agent_timer
+from ai_core.workflow.execution_trace import record_agent_execution, start_agent_timer, record_llm_fallback
 from ai_core.llm.service import llm_service
 from ai_core.prompts.response_prompt import response_prompt
 from ai_core.error_handling import with_fallback, RESPONSE_FALLBACK
@@ -78,6 +78,7 @@ class ResponseAgent(BaseAgent):
             response_text = synthesized_response.response
         except Exception as e:
             # Fallback to simple concatenation if LLM fails
+            record_llm_fallback(state, "response_agent")
             parts = []
             if knowledge:
                 parts.append(str(knowledge))

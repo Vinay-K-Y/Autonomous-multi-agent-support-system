@@ -38,6 +38,12 @@ def mark_documents_retrieved(state: SupportState, count: int) -> None:
     state.metadata.retrieved_documents = count
 
 
+def record_llm_fallback(state: SupportState, component: str) -> None:
+    """Record when an LLM call falls back to non-LLM logic."""
+    state.metadata.llm_fallback_count += 1
+    state.metadata.routing_reasons.append(f"LLM fallback in {component}")
+
+
 def finalize_processing_time(state: SupportState, started_at: float | None = None) -> None:
     if started_at is None:
         started_at = state.metadata.started_at.timestamp()

@@ -15,3 +15,5 @@ class ExecutionPlan(BaseModel):
     tool_calls: List[ToolCall] = Field(
         default_factory=list
     )
+
+    used_fallback: bool = False

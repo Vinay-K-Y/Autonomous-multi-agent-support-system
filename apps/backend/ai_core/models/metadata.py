@@ -26,6 +26,8 @@ class ProcessingMetadata(BaseModel):
 
     llm_call_count: int = 0
 
+    llm_fallback_count: int = 0
+
     execution_trace: dict[str, Any] = Field(default_factory=dict)
 
     planner_reasoning: str = ""

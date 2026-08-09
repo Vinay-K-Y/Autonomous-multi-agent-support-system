@@ -13,4 +13,6 @@ class WorkflowTrace(BaseModel):
 
     llm_calls: int
 
+    llm_fallback_count: int
+
     retrieved_documents: int

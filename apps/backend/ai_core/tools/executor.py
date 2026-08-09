@@ -16,6 +16,7 @@ class ToolExecutor:
     def execute(
         self,
         tool_name: str,
+        state: Any = None,
         **kwargs,
     ) -> Any:
 
@@ -32,7 +33,13 @@ class ToolExecutor:
         for name, parameter in signature.parameters.items():
             if name == "self":
                 continue
-            if name in kwargs:
+            if name == "state":
+                # Pass state if the tool accepts it
+                if state is not None:
+                    normalized_kwargs[name] = state
+                elif parameter.default != inspect.Parameter.empty:
+                    normalized_kwargs[name] = parameter.default
+            elif name in kwargs:
                 normalized_kwargs[name] = kwargs[name]
             elif name == "question":
                 # Try multiple possible parameter names for question
@@ -60,6 +67,7 @@ class ToolExecutor:
     def execute_plan(
         self,
         plan: ExecutionPlan,
+        state: Any = None,
     ) -> dict[str, Any]:
         """
         Executes every tool requested by the planner.
@@ -78,6 +86,7 @@ class ToolExecutor:
 
             results[call.tool] = self.execute(
                 call.tool,
+                state=state,
                 **call.parameters,
             )
 

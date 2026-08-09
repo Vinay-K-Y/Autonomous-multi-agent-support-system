@@ -1,5 +1,6 @@
 from ai_core.rag.pipeline import RAGPipeline
 from ai_core.tools.base_tool import BaseTool
+from typing import Any
 
 
 class KnowledgeTool(BaseTool):
@@ -19,9 +20,11 @@ class KnowledgeTool(BaseTool):
         self,
         question: str,
         conversation: str = "",
+        state: Any = None,
     ):
 
         return self.rag.ask(
             question=question,
             conversation=conversation,
+            state=state,
         )

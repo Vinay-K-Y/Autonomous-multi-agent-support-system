@@ -2,6 +2,7 @@ import logging
 
 from app.mappers import SupportMapper
 from app.services.workflow_executor import WorkflowExecutor
+from app.services.analytics_service import analytics_service
 from ai_core.factories import SupportStateFactory
 from ai_core.memory.conversation_manager import conversation_manager
 from app.db import AsyncSessionLocal, database_available
@@ -74,7 +75,10 @@ class SupportService:
             # 4. Execute the workflow (make async for DB compatibility)
             state = await self.executor.execute_async(initial_state)
 
-            # 5. Save assistant response to conversation history
+            # 5. Record metrics for analytics
+            analytics_service.record_request(state)
+
+            # 6. Save assistant response to conversation history
             if conversation_id and state.response:
                 if self.use_db_memory and db_session:
                     await conv_manager.add_assistant_message(conversation_id, state.response.response, db_session=db_session)

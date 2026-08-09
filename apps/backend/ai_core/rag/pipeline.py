@@ -3,6 +3,7 @@ from langchain_core.exceptions import OutputParserException
 from ai_core.knowledge.service import KnowledgeService
 from ai_core.llm.service import LLMService
 from ai_core.prompts.rag_prompt import RAG_PROMPT
+from ai_core.state.support_state import SupportState
 
 
 class RAGPipeline:
@@ -15,7 +16,7 @@ class RAGPipeline:
     def search(self, query: str):
         return self.knowledge_service.search(query)
 
-    def ask(self, question: str, conversation: str = ""):
+    def ask(self, question: str, conversation: str = "", state: SupportState | None = None):
 
         context = self.get_context(question)
 
@@ -29,6 +30,9 @@ class RAGPipeline:
             response = self.llm.invoke(prompt)
             return response.content
         except Exception:
+            if state:
+                from ai_core.workflow.execution_trace import record_llm_fallback
+                record_llm_fallback(state, "rag_pipeline")
             if context:
                 return (
                     "I found relevant information in the knowledge base. "

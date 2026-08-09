@@ -27,7 +27,7 @@ async def tool_executor_node(
     plan = state.decision.modified_plan or state.execution_plan
 
     try:
-        results = tool_executor.execute_plan(plan)
+        results = tool_executor.execute_plan(plan, state=state)
     except Exception as e:
         # One misbehaving tool call shouldn't take down the whole request.
         logger.error(f"Tool execution failed: {type(e).__name__}: {e}", exc_info=True)
