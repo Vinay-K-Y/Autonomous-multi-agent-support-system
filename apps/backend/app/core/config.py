@@ -52,6 +52,10 @@ class Settings(BaseSettings):
     CORS_ALLOW_METHODS: list[str] = ["*"]
     CORS_ALLOW_HEADERS: list[str] = ["*"]
 
+    # Workflow Configuration
+    ESCALATION_THRESHOLD: float = 0.7  # Confidence threshold below which requests escalate to human review
+    KNOWLEDGE_CONFIDENCE_THRESHOLD: float = 0.8  # Confidence threshold for knowledge retrieval
+
     model_config = SettingsConfigDict(
         env_file=".env",
         extra="ignore",

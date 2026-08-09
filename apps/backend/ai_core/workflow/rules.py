@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from ai_core.models.intent import IntentType
+from app.core.config import settings
 
 
 @dataclass(frozen=True)
@@ -20,8 +21,8 @@ class WorkflowRules:
         IntentType.TECHNICAL_ISSUE,
     )
 
-    escalation_threshold: float = 0.7
-    knowledge_confidence_threshold: float = 0.8
+    escalation_threshold: float = settings.ESCALATION_THRESHOLD
+    knowledge_confidence_threshold: float = settings.KNOWLEDGE_CONFIDENCE_THRESHOLD
     default_tone: str = "professional"
 
 
