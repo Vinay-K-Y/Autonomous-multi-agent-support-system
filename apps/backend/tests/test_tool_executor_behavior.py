@@ -40,7 +40,13 @@ def test_tool_executor_returns_dict_keyed_by_tool_name() -> None:
 
 
 def test_tool_executor_handles_failing_tool_gracefully() -> None:
-    """Assert a failing tool doesn't take down other tools - caught at tool_executor_node level."""
+    """Assert a failing tool doesn't take down other tools - caught at tool_executor_node level.
+    
+    Current behavior: execute_plan() propagates exceptions (fail fast).
+    This is acceptable because tool_executor_node catches and logs errors,
+    allowing the workflow to continue with partial state.
+    Future enhancement: Consider per-tool isolation for better resilience.
+    """
     executor = ToolExecutor()
     
     # Create a plan with multiple tools
@@ -78,6 +84,8 @@ def test_tool_executor_handles_failing_tool_gracefully() -> None:
 
 def test_tool_executor_passes_state_to_tools() -> None:
     """Assert ToolExecutor passes state parameter to tools that accept it."""
+    import inspect
+    
     executor = ToolExecutor()
     
     # Create a plan with a tool
@@ -91,10 +99,13 @@ def test_tool_executor_passes_state_to_tools() -> None:
     # Mock state
     mock_state = Mock()
     
-    # Mock the tool registry
+    # Mock the tool registry with a tool that has state in its signature
     with patch('ai_core.tools.executor.tool_registry') as mock_registry:
         mock_knowledge = Mock()
         mock_knowledge.execute.return_value = "Knowledge result"
+        
+        # Mock the signature to include state parameter
+        mock_knowledge.execute.__signature__ = inspect.signature(lambda self, question, state=None, conversation="": None)
         
         mock_registry.get.return_value = mock_knowledge
         
@@ -103,5 +114,5 @@ def test_tool_executor_passes_state_to_tools() -> None:
     # Assert that the tool was called with state parameter
     mock_knowledge.execute.assert_called_once()
     call_kwargs = mock_knowledge.execute.call_args[1]
-    # The tool should have received state if its signature accepts it
-    # This depends on the signature inspection in ToolExecutor.execute
+    assert "state" in call_kwargs, "Expected 'state' in tool call kwargs"
+    assert call_kwargs["state"] is mock_state, "Expected state to be passed to tool"

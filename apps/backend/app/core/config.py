@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     APP_VERSION: str = "0.1.0"
 
     ENVIRONMENT: str = "development"
-    DEBUG: bool = True
+    DEBUG: bool = False
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
