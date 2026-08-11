@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from ai_core.calibration.provider import CalibratedThresholdProvider, calibrated_threshold_provider
 from ai_core.models.decision import DecisionResult
 from ai_core.state.support_state import SupportState
 from ai_core.workflow.execution_trace import (
@@ -12,8 +13,12 @@ from ai_core.workflow.rules import WORKFLOW_RULES
 
 
 class DecisionEngine:
-    def __init__(self, rules=None):
+    def __init__(self, rules=None, threshold_provider: CalibratedThresholdProvider | None = None):
         self.rules = rules or WORKFLOW_RULES
+        # Falls back to settings.ESCALATION_THRESHOLD (self.rules.escalation_threshold)
+        # whenever no valid calibration artifact exists — see
+        # ai_core/calibration/provider.py for details of the guarantee.
+        self.threshold_provider = threshold_provider or calibrated_threshold_provider
 
     def route_after_intent(self, state: SupportState) -> str:
         if state.intent is None:
@@ -56,10 +61,18 @@ class DecisionEngine:
             return False, "No intent available; no escalation required."
 
         confidence = state.intent.confidence
-        if confidence < self.rules.escalation_threshold:
-            return True, f"Confidence {confidence:.2f} is below the escalation threshold {self.rules.escalation_threshold:.2f}."
+        threshold, threshold_source = self.threshold_provider.get_escalation_threshold()
 
-        return False, f"Confidence {confidence:.2f} is above the escalation threshold {self.rules.escalation_threshold:.2f}."
+        if confidence < threshold:
+            return True, (
+                f"Confidence {confidence:.2f} is below the escalation threshold "
+                f"{threshold:.2f} [{threshold_source}]."
+            )
+
+        return False, (
+            f"Confidence {confidence:.2f} is above the escalation threshold "
+            f"{threshold:.2f} [{threshold_source}]."
+        )
 
     def evaluate(self, state: SupportState) -> DecisionResult:
         modified_plan = state.execution_plan

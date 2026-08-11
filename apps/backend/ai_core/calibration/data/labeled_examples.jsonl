@@ -1,0 +1,42 @@
+{"message": "The app crashes when I use my subscription", "true_intent": "technical_issue"}
+{"message": "Random feedback about a phone case", "true_intent": "other"}
+{"message": "My account got locked after buying the premium plan", "true_intent": "account_issue"}
+{"message": "Not sure who to ask about the premium plan", "true_intent": "other"}
+{"message": "Package for the premium plan is delayed", "true_intent": "delivery_issue"}
+{"message": "I was charged twice for a phone case", "true_intent": "billing_issue"}
+{"message": "I was charged twice for my subscription", "true_intent": "billing_issue"}
+{"message": "What is your return policy on a phone case?", "true_intent": "general_query"}
+{"message": "What is your return policy on my order #4521?", "true_intent": "general_query"}
+{"message": "my subscription is not working", "true_intent": "technical_issue"}
+{"message": "I want a refund for the premium plan", "true_intent": "refund"}
+{"message": "My invoice for headphones looks wrong", "true_intent": "billing_issue"}
+{"message": "My a laptop has not arrived yet", "true_intent": "delivery_issue"}
+{"message": "Do you ship my order #4521 internationally?", "true_intent": "general_query"}
+{"message": "My account got locked after buying my order #4521", "true_intent": "account_issue"}
+{"message": "I want a refund for the premium plan", "true_intent": "refund"}
+{"message": "Just wanted to say thanks for the premium plan", "true_intent": "other"}
+{"message": "I was charged twice for headphones", "true_intent": "billing_issue"}
+{"message": "My invoice for the premium plan looks wrong", "true_intent": "billing_issue"}
+{"message": "a laptop is not working", "true_intent": "technical_issue"}
+{"message": "Package for my subscription is delayed", "true_intent": "delivery_issue"}
+{"message": "Need to update email on my account regarding a laptop", "true_intent": "account_issue"}
+{"message": "headphones is not working", "true_intent": "technical_issue"}
+{"message": "My my subscription has not arrived yet", "true_intent": "delivery_issue"}
+{"message": "Please refund my order, my subscription arrived damaged", "true_intent": "refund"}
+{"message": "Do you ship headphones internationally?", "true_intent": "general_query"}
+{"message": "I cannot log in, getting an error with my subscription", "true_intent": "technical_issue"}
+{"message": "I want a refund for my subscription", "true_intent": "refund"}
+{"message": "Random feedback about a phone case", "true_intent": "other"}
+{"message": "Not sure who to ask about a laptop", "true_intent": "other"}
+{"message": "My my order #4521 has not arrived yet", "true_intent": "delivery_issue"}
+{"message": "I cannot access my account after ordering the premium plan", "true_intent": "account_issue"}
+{"message": "My account got locked after buying a phone case", "true_intent": "account_issue"}
+{"message": "I want a refund for the blue jacket", "true_intent": "refund"}
+{"message": "Need to update email on my account regarding my subscription", "true_intent": "account_issue"}
+{"message": "What is your return policy on a phone case?", "true_intent": "general_query"}
+{"message": "Not sure who to ask about the blue jacket", "true_intent": "other"}
+{"message": "Package for a phone case is delayed", "true_intent": "delivery_issue"}
+{"message": "The app crashes when I use a laptop", "true_intent": "technical_issue"}
+{"message": "Why was I billed extra for the blue jacket?", "true_intent": "billing_issue"}
+{"message": "Do you ship the premium plan internationally?", "true_intent": "general_query"}
+{"message": "Can I get my money back for a phone case?", "true_intent": "refund"}

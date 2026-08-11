@@ -58,6 +58,15 @@ class Settings(BaseSettings):
     ESCALATION_THRESHOLD: float = 0.7  # Confidence threshold below which requests escalate to human review
     KNOWLEDGE_CONFIDENCE_THRESHOLD: float = 0.8  # Confidence threshold for knowledge retrieval
 
+    # Calibrated Escalation Configuration (see CALIBRATION.md)
+    # These are the defaults used by scripts/compute_calibrated_threshold.py
+    # when no --target-risk/--delta flags are passed. They do NOT affect
+    # runtime behavior directly — DecisionEngine only reads whatever
+    # threshold is baked into the calibration artifact on disk (or falls
+    # back to ESCALATION_THRESHOLD above if no artifact exists).
+    CALIBRATION_TARGET_RISK: float = 0.10  # Target: at most this fraction of non-escalated requests should be wrong
+    CALIBRATION_DELTA: float = 0.05  # Confidence level for the guarantee: (1 - delta) = 95% by default
+
     model_config = SettingsConfigDict(
         env_file=".env",
         extra="ignore",

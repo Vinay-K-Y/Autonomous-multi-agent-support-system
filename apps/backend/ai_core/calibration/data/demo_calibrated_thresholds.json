@@ -1,0 +1,14 @@
+{
+  "threshold": 0.6279,
+  "target_risk": 0.28,
+  "delta": 0.05,
+  "calibration_set_size": 300,
+  "n_accepted_at_threshold": 99,
+  "coverage": 0.33,
+  "empirical_risk_at_threshold": 0.15151515151515152,
+  "risk_upper_bound_at_threshold": 0.2745190578659069,
+  "fallback_used": false,
+  "fallback_reason": null,
+  "computed_at": "2026-08-10T09:14:39.324837+00:00",
+  "source_dataset": "ai_core/calibration/data/demo_calibration_examples.jsonl"
+}
