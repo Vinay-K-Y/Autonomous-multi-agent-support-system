@@ -1,0 +1,798 @@
+{
+  "summary": {
+    "adaptive": {
+      "n": 25,
+      "latency_ms_p50": 5888.2,
+      "latency_ms_p95": 11243.5,
+      "mean_llm_call_count": 1,
+      "shortcut_taken_count": 14
+    },
+    "full_pipeline": {
+      "n": 25,
+      "latency_ms_p50": 8275.9,
+      "latency_ms_p95": 10358.4,
+      "mean_llm_call_count": 1,
+      "shortcut_taken_count": 0
+    },
+    "comparison": {
+      "latency_reduction_pct": 16.9,
+      "llm_call_reduction_pct": 0.0,
+      "intent_disagreement_count": 0,
+      "intent_disagreement_messages": []
+    }
+  },
+  "raw_results": [
+    {
+      "message": "What are your business hours?",
+      "query_type": "high_confidence_general",
+      "config": "adaptive",
+      "latency_ms": 11565.257668999948,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 0.99,
+      "took_shortcut": true,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "What are your business hours?",
+      "query_type": "high_confidence_general",
+      "config": "full_pipeline",
+      "latency_ms": 7824.122541000179,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 1.0,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Do you ship internationally?",
+      "query_type": "high_confidence_general",
+      "config": "adaptive",
+      "latency_ms": 4503.700389000187,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 1.0,
+      "took_shortcut": true,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Do you ship internationally?",
+      "query_type": "high_confidence_general",
+      "config": "full_pipeline",
+      "latency_ms": 7327.729910000016,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 1.0,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "What is your return policy?",
+      "query_type": "high_confidence_general",
+      "config": "adaptive",
+      "latency_ms": 5781.852644999617,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 0.9999,
+      "took_shortcut": true,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "What is your return policy?",
+      "query_type": "high_confidence_general",
+      "config": "full_pipeline",
+      "latency_ms": 9499.44233999986,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 1.0,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "How can I contact customer support?",
+      "query_type": "high_confidence_general",
+      "config": "adaptive",
+      "latency_ms": 5556.512225000006,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 1.0,
+      "took_shortcut": true,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "How can I contact customer support?",
+      "query_type": "high_confidence_general",
+      "config": "full_pipeline",
+      "latency_ms": 8829.526532999807,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 1.0,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "What payment methods do you accept?",
+      "query_type": "high_confidence_general",
+      "config": "adaptive",
+      "latency_ms": 5238.421456999731,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 1.0,
+      "took_shortcut": true,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "What payment methods do you accept?",
+      "query_type": "high_confidence_general",
+      "config": "full_pipeline",
+      "latency_ms": 8217.498553000041,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 0.9999,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Where are you located?",
+      "query_type": "high_confidence_general",
+      "config": "adaptive",
+      "latency_ms": 4351.371127999755,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 1.0,
+      "took_shortcut": true,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Where are you located?",
+      "query_type": "high_confidence_general",
+      "config": "full_pipeline",
+      "latency_ms": 7784.2429620000075,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 0.9,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "What is your company's email address?",
+      "query_type": "high_confidence_general",
+      "config": "adaptive",
+      "latency_ms": 4271.21259400019,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 1.0,
+      "took_shortcut": true,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "What is your company's email address?",
+      "query_type": "high_confidence_general",
+      "config": "full_pipeline",
+      "latency_ms": 7268.4516780000195,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 1.0,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Do you have a mobile app?",
+      "query_type": "high_confidence_general",
+      "config": "adaptive",
+      "latency_ms": 4384.046382999713,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 0.9,
+      "took_shortcut": true,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Do you have a mobile app?",
+      "query_type": "high_confidence_general",
+      "config": "full_pipeline",
+      "latency_ms": 8784.35949300001,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 1.0,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "What sizes are available for the blue jacket?",
+      "query_type": "high_confidence_general",
+      "config": "adaptive",
+      "latency_ms": 4827.436834000309,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 1.0,
+      "took_shortcut": true,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "What sizes are available for the blue jacket?",
+      "query_type": "high_confidence_general",
+      "config": "full_pipeline",
+      "latency_ms": 7784.644485000172,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 1.0,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Is there a warranty on your products?",
+      "query_type": "high_confidence_general",
+      "config": "adaptive",
+      "latency_ms": 4765.412318000017,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 1.0,
+      "took_shortcut": true,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Is there a warranty on your products?",
+      "query_type": "high_confidence_general",
+      "config": "full_pipeline",
+      "latency_ms": 8373.376745999849,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 0.9999,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "I want a refund for my broken headphones",
+      "query_type": "support_specific",
+      "config": "adaptive",
+      "latency_ms": 7795.566752000013,
+      "llm_call_count": 1,
+      "predicted_intent": "refund",
+      "confidence": 0.95,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "I want a refund for my broken headphones",
+      "query_type": "support_specific",
+      "config": "full_pipeline",
+      "latency_ms": 8275.855227000193,
+      "llm_call_count": 1,
+      "predicted_intent": "refund",
+      "confidence": 0.95,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "My order has not arrived yet",
+      "query_type": "support_specific",
+      "config": "adaptive",
+      "latency_ms": 7055.68150199997,
+      "llm_call_count": 1,
+      "predicted_intent": "delivery_issue",
+      "confidence": 0.95,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "My order has not arrived yet",
+      "query_type": "support_specific",
+      "config": "full_pipeline",
+      "latency_ms": 7216.513037999903,
+      "llm_call_count": 1,
+      "predicted_intent": "delivery_issue",
+      "confidence": 0.9,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "I was charged twice for my subscription",
+      "query_type": "support_specific",
+      "config": "adaptive",
+      "latency_ms": 9228.350997999769,
+      "llm_call_count": 1,
+      "predicted_intent": "billing_issue",
+      "confidence": 0.9999,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "I was charged twice for my subscription",
+      "query_type": "support_specific",
+      "config": "full_pipeline",
+      "latency_ms": 8463.733993999995,
+      "llm_call_count": 1,
+      "predicted_intent": "billing_issue",
+      "confidence": 0.95,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "The app crashes every time I try to log in",
+      "query_type": "support_specific",
+      "config": "adaptive",
+      "latency_ms": 11932.17342800017,
+      "llm_call_count": 1,
+      "predicted_intent": "technical_issue",
+      "confidence": 0.9,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "The app crashes every time I try to log in",
+      "query_type": "support_specific",
+      "config": "full_pipeline",
+      "latency_ms": 8240.062570000191,
+      "llm_call_count": 1,
+      "predicted_intent": "technical_issue",
+      "confidence": 0.95,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "My account got locked after I updated my email",
+      "query_type": "support_specific",
+      "config": "adaptive",
+      "latency_ms": 9021.719808999933,
+      "llm_call_count": 1,
+      "predicted_intent": "account_issue",
+      "confidence": 0.95,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "My account got locked after I updated my email",
+      "query_type": "support_specific",
+      "config": "full_pipeline",
+      "latency_ms": 8879.542855999716,
+      "llm_call_count": 1,
+      "predicted_intent": "account_issue",
+      "confidence": 0.95,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Please cancel my order #4521",
+      "query_type": "support_specific",
+      "config": "adaptive",
+      "latency_ms": 9856.831842000247,
+      "llm_call_count": 1,
+      "predicted_intent": "refund",
+      "confidence": 0.9999999999999999,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Please cancel my order #4521",
+      "query_type": "support_specific",
+      "config": "full_pipeline",
+      "latency_ms": 9223.602833999848,
+      "llm_call_count": 1,
+      "predicted_intent": "refund",
+      "confidence": 0.9999,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "I need to change my shipping address for an order in transit",
+      "query_type": "support_specific",
+      "config": "adaptive",
+      "latency_ms": 9862.897984000028,
+      "llm_call_count": 1,
+      "predicted_intent": "delivery_issue",
+      "confidence": 1.0,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "I need to change my shipping address for an order in transit",
+      "query_type": "support_specific",
+      "config": "full_pipeline",
+      "latency_ms": 10445.134670000243,
+      "llm_call_count": 1,
+      "predicted_intent": "delivery_issue",
+      "confidence": 1.0,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "My package arrived damaged, I need a replacement",
+      "query_type": "support_specific",
+      "config": "adaptive",
+      "latency_ms": 9956.37914300005,
+      "llm_call_count": 1,
+      "predicted_intent": "delivery_issue",
+      "confidence": 1.0,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "My package arrived damaged, I need a replacement",
+      "query_type": "support_specific",
+      "config": "full_pipeline",
+      "latency_ms": 10011.239492000186,
+      "llm_call_count": 1,
+      "predicted_intent": "delivery_issue",
+      "confidence": 1.0,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Why was I billed for a plan I cancelled?",
+      "query_type": "support_specific",
+      "config": "adaptive",
+      "latency_ms": 8868.425216000105,
+      "llm_call_count": 1,
+      "predicted_intent": "billing_issue",
+      "confidence": 0.9999,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Why was I billed for a plan I cancelled?",
+      "query_type": "support_specific",
+      "config": "full_pipeline",
+      "latency_ms": 8367.044269999951,
+      "llm_call_count": 1,
+      "predicted_intent": "billing_issue",
+      "confidence": 0.95,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "I can't reset my password, the reset email never arrives",
+      "query_type": "support_specific",
+      "config": "adaptive",
+      "latency_ms": 8783.61870100025,
+      "llm_call_count": 1,
+      "predicted_intent": "technical_issue",
+      "confidence": 0.9,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tool execution failed: MemoryTool.execute() missing 1 required positional argument: 'conversation_id'",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "I can't reset my password, the reset email never arrives",
+      "query_type": "support_specific",
+      "config": "full_pipeline",
+      "latency_ms": 10481.421874000262,
+      "llm_call_count": 1,
+      "predicted_intent": "technical_issue",
+      "confidence": 0.9,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tool execution failed: MemoryTool.execute() missing 1 required positional argument: 'conversation_id'",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Hey, quick question about my order",
+      "query_type": "ambiguous",
+      "config": "adaptive",
+      "latency_ms": 4551.250881999749,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 0.9999,
+      "took_shortcut": true,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Hey, quick question about my order",
+      "query_type": "ambiguous",
+      "config": "full_pipeline",
+      "latency_ms": 7653.050008000264,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 0.9999,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Something is wrong with my account",
+      "query_type": "ambiguous",
+      "config": "adaptive",
+      "latency_ms": 6962.442211000052,
+      "llm_call_count": 1,
+      "predicted_intent": "account_issue",
+      "confidence": 1.0,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tool execution failed: MemoryTool.execute() missing 1 required positional argument: 'conversation_id'",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Something is wrong with my account",
+      "query_type": "ambiguous",
+      "config": "full_pipeline",
+      "latency_ms": 7909.810728000139,
+      "llm_call_count": 1,
+      "predicted_intent": "account_issue",
+      "confidence": 1.0,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "I have an issue, not sure who to ask",
+      "query_type": "ambiguous",
+      "config": "adaptive",
+      "latency_ms": 5531.357392000245,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 1.0,
+      "took_shortcut": true,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "I have an issue, not sure who to ask",
+      "query_type": "ambiguous",
+      "config": "full_pipeline",
+      "latency_ms": 7473.808291000296,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 0.95,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tool execution failed: MemoryTool.execute() missing 1 required positional argument: 'conversation_id'",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Can you help me with something?",
+      "query_type": "ambiguous",
+      "config": "adaptive",
+      "latency_ms": 4897.591656000259,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 0.9,
+      "took_shortcut": true,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "Can you help me with something?",
+      "query_type": "ambiguous",
+      "config": "full_pipeline",
+      "latency_ms": 7424.277691000043,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 0.9,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "General question about billing",
+      "query_type": "ambiguous",
+      "config": "adaptive",
+      "latency_ms": 5888.195775999975,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 0.9999,
+      "took_shortcut": true,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "response: response generated"
+      ]
+    },
+    {
+      "message": "General question about billing",
+      "query_type": "ambiguous",
+      "config": "full_pipeline",
+      "latency_ms": 9426.96290799995,
+      "llm_call_count": 1,
+      "predicted_intent": "general_query",
+      "confidence": 1.0,
+      "took_shortcut": false,
+      "routing_reasons": [
+        "intent: intent detection completed",
+        "planner completed",
+        "tools executed",
+        "response: response generated"
+      ]
+    }
+  ]
+}
