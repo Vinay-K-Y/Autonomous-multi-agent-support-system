@@ -25,6 +25,10 @@ memory_agent = MemoryAgent()
 
 def route_after_intent(state: SupportState) -> str:
     """Route after intent detection based on intent type and confidence."""
+    if state.force_full_pipeline:
+        logger.info("Route after intent: force_full_pipeline=True, routing to planner")
+        return "planner"
+
     if state.intent is None:
         logger.info(f"Route after intent: No intent detected, routing to planner")
         return "planner"

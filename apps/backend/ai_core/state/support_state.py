@@ -37,3 +37,12 @@ class SupportState(BaseModel):
     execution_plan: ExecutionPlan | None = None
     decision: DecisionResult | None = None
     tool_results: dict = Field(default_factory=dict)
+
+    # Benchmark/testing control flag: when True, forces the graph to take
+    # the full planner -> decision -> tool_executor path even for requests
+    # that would otherwise qualify for the conditional skip-to-response
+    # shortcut (see ai_core/graph/builder.py::route_after_intent). Used by
+    # scripts/benchmark_conditional_routing.py to run the same query
+    # through both configurations for an apples-to-apples comparison.
+    # Defaults to False, so normal request handling is unaffected.
+    force_full_pipeline: bool = False

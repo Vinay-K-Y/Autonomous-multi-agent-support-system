@@ -27,6 +27,8 @@ class SupportMapper:
 
             conversation_id=state.request.conversation_id,
 
+            request_id=state.metadata.request_id,
+
             response=(
                 state.response.response
                 if state.response

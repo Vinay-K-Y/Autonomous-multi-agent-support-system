@@ -176,6 +176,7 @@ class DecisionEngine:
             reasoning="Execution plan approved.",
             modified_plan=modified_plan,
             blocked_tools=blocked_tools,
+            escalation_threshold_used=self.threshold_provider.get_escalation_threshold()[0],
         )
 
     def record_agent(self, state: SupportState, agent_name: str, *, details: str | None = None, extra: dict | None = None) -> None:

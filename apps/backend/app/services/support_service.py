@@ -78,6 +78,32 @@ class SupportService:
             # 5. Record metrics for analytics
             analytics_service.record_request(state)
 
+            # 5b. Log this decision's confidence/threshold/outcome shell for
+            # adaptive recalibration. outcome_correct is left unlabeled here
+            # (we don't know yet whether the decision was right) — it gets
+            # filled in later via the feedback endpoint once ground truth
+            # is available. See ai_core/calibration/outcome_store.py and
+            # ADAPTIVE_THRESHOLDS.md.
+            if state.intent is not None and state.decision is not None:
+                from ai_core.calibration.outcome_store import log_outcome
+
+                try:
+                    log_outcome(
+                        request_id=state.metadata.request_id,
+                        confidence=state.intent.confidence,
+                        threshold_used=(
+                            state.decision.escalation_threshold_used
+                            if state.decision.escalation_threshold_used is not None
+                            else 0.0
+                        ),
+                        was_escalated=(
+                            state.human_review.required if state.human_review else False
+                        ),
+                    )
+                except Exception:
+                    # Outcome logging must never break a live request.
+                    logger.exception("Failed to log calibration outcome record")
+
             # 6. Save assistant response to conversation history
             if conversation_id and state.response:
                 if self.use_db_memory and db_session:

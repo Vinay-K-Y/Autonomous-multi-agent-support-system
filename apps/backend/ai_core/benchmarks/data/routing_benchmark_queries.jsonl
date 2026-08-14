@@ -1,0 +1,25 @@
+{"message": "What are your business hours?", "query_type": "high_confidence_general", "expected_intent": "general_query"}
+{"message": "Do you ship internationally?", "query_type": "high_confidence_general", "expected_intent": "general_query"}
+{"message": "What is your return policy?", "query_type": "high_confidence_general", "expected_intent": "general_query"}
+{"message": "How can I contact customer support?", "query_type": "high_confidence_general", "expected_intent": "general_query"}
+{"message": "What payment methods do you accept?", "query_type": "high_confidence_general", "expected_intent": "general_query"}
+{"message": "Where are you located?", "query_type": "high_confidence_general", "expected_intent": "general_query"}
+{"message": "What is your company's email address?", "query_type": "high_confidence_general", "expected_intent": "general_query"}
+{"message": "Do you have a mobile app?", "query_type": "high_confidence_general", "expected_intent": "general_query"}
+{"message": "What sizes are available for the blue jacket?", "query_type": "high_confidence_general", "expected_intent": "general_query"}
+{"message": "Is there a warranty on your products?", "query_type": "high_confidence_general", "expected_intent": "general_query"}
+{"message": "I want a refund for my broken headphones", "query_type": "support_specific", "expected_intent": "varies"}
+{"message": "My order has not arrived yet", "query_type": "support_specific", "expected_intent": "varies"}
+{"message": "I was charged twice for my subscription", "query_type": "support_specific", "expected_intent": "varies"}
+{"message": "The app crashes every time I try to log in", "query_type": "support_specific", "expected_intent": "varies"}
+{"message": "My account got locked after I updated my email", "query_type": "support_specific", "expected_intent": "varies"}
+{"message": "Please cancel my order #4521", "query_type": "support_specific", "expected_intent": "varies"}
+{"message": "I need to change my shipping address for an order in transit", "query_type": "support_specific", "expected_intent": "varies"}
+{"message": "My package arrived damaged, I need a replacement", "query_type": "support_specific", "expected_intent": "varies"}
+{"message": "Why was I billed for a plan I cancelled?", "query_type": "support_specific", "expected_intent": "varies"}
+{"message": "I can't reset my password, the reset email never arrives", "query_type": "support_specific", "expected_intent": "varies"}
+{"message": "Hey, quick question about my order", "query_type": "ambiguous", "expected_intent": "varies"}
+{"message": "Something is wrong with my account", "query_type": "ambiguous", "expected_intent": "varies"}
+{"message": "I have an issue, not sure who to ask", "query_type": "ambiguous", "expected_intent": "varies"}
+{"message": "Can you help me with something?", "query_type": "ambiguous", "expected_intent": "varies"}
+{"message": "General question about billing", "query_type": "ambiguous", "expected_intent": "varies"}

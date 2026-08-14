@@ -7,6 +7,8 @@ class SupportResponse(BaseModel):
 
     conversation_id: str
 
+    request_id: str
+
     response: str
 
     intent: Optional[str]
