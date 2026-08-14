@@ -4,8 +4,6 @@ from ai_core.calibration.provider import CalibratedThresholdProvider, calibrated
 from ai_core.models.decision import DecisionResult
 from ai_core.state.support_state import SupportState
 from ai_core.workflow.execution_trace import (
-    increment_llm_calls,
-    mark_documents_retrieved,
     record_agent_execution,
     start_agent_timer,
 )
@@ -182,9 +180,3 @@ class DecisionEngine:
     def record_agent(self, state: SupportState, agent_name: str, *, details: str | None = None, extra: dict | None = None) -> None:
         started_at = start_agent_timer()
         record_agent_execution(state, agent_name, started_at, details=details, extra=extra)
-
-    def track_knowledge(self, state: SupportState, document_count: int) -> None:
-        mark_documents_retrieved(state, document_count)
-
-    def track_llm_call(self, state: SupportState, count: int = 1) -> None:
-        increment_llm_calls(state, count)

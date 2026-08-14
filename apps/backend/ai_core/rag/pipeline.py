@@ -4,6 +4,7 @@ from ai_core.knowledge.service import KnowledgeService
 from ai_core.llm.service import LLMService
 from ai_core.prompts.rag_prompt import RAG_PROMPT
 from ai_core.state.support_state import SupportState
+from ai_core.workflow.execution_trace import increment_llm_calls
 
 
 class RAGPipeline:
@@ -28,6 +29,8 @@ class RAGPipeline:
 
         try:
             response = self.llm.invoke(prompt)
+            if state:
+                increment_llm_calls(state)
             return response.content
         except Exception:
             if state:

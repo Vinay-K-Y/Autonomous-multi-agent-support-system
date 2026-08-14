@@ -1,7 +1,7 @@
 from ai_core.observability.decorators import traced
 from ai_core.planner.planner import PlannerAgent
 from ai_core.state.support_state import SupportState
-from ai_core.workflow.execution_trace import record_llm_fallback
+from ai_core.workflow.execution_trace import record_llm_fallback, increment_llm_calls
 
 
 planner = PlannerAgent()
@@ -22,5 +22,7 @@ async def planner_node(
 
     if plan.used_fallback:
         record_llm_fallback(state, "planner")
+    else:
+        increment_llm_calls(state)
 
     return state
