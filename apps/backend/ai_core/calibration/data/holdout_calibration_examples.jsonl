@@ -1,0 +1,195 @@
+{"message":"The product is not working after initialization","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The product is not working after service","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The product is not working with my environment","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The product is not working after setup","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The product is not working after installation","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"I'm having trouble with the API integration","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.75}
+{"message":"The website is not loading on vivaldi","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.75}
+{"message":"The product is not working with my settings","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The website is not loading on private mode","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.75}
+{"message":"The product is not working after installation","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The app is draining my battery","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The product is not working with my ecosystem","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The mobile app keeps freezing","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The product is not working after validation","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The product is not working after repair","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The product is not working with my framework","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The website is not loading on dark mode","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The website is not loading on incognito","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.75}
+{"message":"The website is not accessible","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The product is not working after update","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"my subscription is not working","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The website has broken links","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The website is showing 404 errors","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"I can't complete the checkout process","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.75}
+{"message":"The website is not loading images","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The product is not working after optimization","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The product is not working with my dependencies","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"My discount code isn't working","true_intent":"technical_issue","predicted_intent":"billing_issue","confidence":0.85}
+{"message":"The website is not responding to requests","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The product is not working with my hardware","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The product is not working with my browser","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The product is not working after configuration","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The website is not accepting my input","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.75}
+{"message":"The website is not secure","true_intent":"technical_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The product doesn't match the pictures","true_intent":"other","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"Not sure who to ask about a laptop","true_intent":"other","predicted_intent":"general_query","confidence":0.75}
+{"message":"The product is out of warranty","true_intent":"other","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"Not sure who to ask about the premium plan","true_intent":"other","predicted_intent":"general_query","confidence":0.75}
+{"message":"I want to leave a review for the product","true_intent":"other","predicted_intent":"general_query","confidence":0.75}
+{"message":"I need to change my account affiliation","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.85}
+{"message":"I want to update my account maintenance","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.75}
+{"message":"I need to verify my account subscription","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.75}
+{"message":"I need to verify my email address","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.75}
+{"message":"I need to change my shipping address","true_intent":"account_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"I want to update my account interaction","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.75}
+{"message":"I need to add another payment method","true_intent":"account_issue","predicted_intent":"general_query","confidence":0.75}
+{"message":"I need to verify my account status","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.75}
+{"message":"I need to verify my identity","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.75}
+{"message":"I need to change my account permissions","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.85}
+{"message":"I need to change my account association","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.85}
+{"message":"I need to change my account cooperation","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.85}
+{"message":"I need to verify my account verification","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.85}
+{"message":"I want to update my account configuration","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.85}
+{"message":"I want to update my account enrollment","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.75}
+{"message":"I need to change my account involvement","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.7}
+{"message":"I need to change my account coordination","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.85}
+{"message":"I want to change my account language","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.75}
+{"message":"I need to verify my account integration","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.7}
+{"message":"I want to update my account integration","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.75}
+{"message":"I want to deactivate my account","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.85}
+{"message":"I want to update my account administration","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.85}
+{"message":"I want to update my account information","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.85}
+{"message":"I need to update my security questions","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.85}
+{"message":"My account was hacked","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.85}
+{"message":"How do I enable two-factor authentication?","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.75}
+{"message":"I need to verify my account partnership","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.75}
+{"message":"I need to change my account security","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.85}
+{"message":"I need to change my account administration","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.75}
+{"message":"I want to update my account setup","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.85}
+{"message":"I need to change my account interaction","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.7}
+{"message":"I forgot my password and can't reset it","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.85}
+{"message":"I need to change my account subscription","true_intent":"account_issue","predicted_intent":"account_issue","confidence":0.85}
+{"message":"The delivery was delayed due to order preparation","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"My order was shipped with wrong comments","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"My my subscription has not arrived yet","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The package was delivered without invoice","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"My order is missing items","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The product is missing accessories","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"I received a damaged item","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"I received a malfunctioning goods","true_intent":"delivery_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"My order was shipped with wrong quantity","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"My order was shipped with wrong content","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The product is defective","true_intent":"delivery_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The package was delivered without signature","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The package was delivered without barcode","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"My order was shipped without insurance","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"I received a broken product","true_intent":"delivery_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"I received a wrong size","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The package was delivered without setup guide","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"My order was delayed due to customs","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The product arrived after the estimated delivery date","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The package was delivered without qr code","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The package was delivered without quick start guide","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The package was delivered without user guide","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The package was delivered without insurance","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The package was delivered without manual","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The package was delivered without handbook","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The delivery box was crushed","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"I received a broken item","true_intent":"delivery_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The delivery was delayed due to order processing","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The delivery was delayed due to order rejection","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The delivery was delayed due to order validation","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The delivery was delayed due to order finalization","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"I received a defective product","true_intent":"delivery_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"My order was shipped with wrong parameters","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The package was delivered without stickers","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"My my order #4521 has not arrived yet","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The product is missing the warranty card","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"I received the wrong color","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"I received a broken goods","true_intent":"delivery_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"The delivery was delayed due to shipping","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The package was delivered without documentation","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"The package was delivered to the wrong door","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.95}
+{"message":"The package was delivered without installation guide","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"My order was shipped with missing items","true_intent":"delivery_issue","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"I was charged for a service I reported","true_intent":"billing_issue","predicted_intent":"billing_issue","confidence":0.85}
+{"message":"I want to report a subscription download","true_intent":"billing_issue","predicted_intent":"technical_issue","confidence":0.75}
+{"message":"I want to report a subscription export","true_intent":"billing_issue","predicted_intent":"technical_issue","confidence":0.75}
+{"message":"I was charged for a service I complained about","true_intent":"billing_issue","predicted_intent":"billing_issue","confidence":0.85}
+{"message":"I was charged for an upgrade I didn't request","true_intent":"billing_issue","predicted_intent":"billing_issue","confidence":0.85}
+{"message":"I want to report a billing error","true_intent":"billing_issue","predicted_intent":"billing_issue","confidence":0.95}
+{"message":"I want to report a subscription note","true_intent":"billing_issue","predicted_intent":"billing_issue","confidence":0.85}
+{"message":"I was charged for a service I cancelled","true_intent":"billing_issue","predicted_intent":"refund","confidence":0.85}
+{"message":"I was charged twice for my subscription","true_intent":"billing_issue","predicted_intent":"billing_issue","confidence":0.85}
+{"message":"I was charged for a service I restored","true_intent":"billing_issue","predicted_intent":"refund","confidence":0.85}
+{"message":"I was charged for a service I paused","true_intent":"billing_issue","predicted_intent":"billing_issue","confidence":0.85}
+{"message":"I was charged twice for headphones","true_intent":"billing_issue","predicted_intent":"billing_issue","confidence":0.85}
+{"message":"I want to report a subscription error","true_intent":"billing_issue","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"I was charged for a service I synced","true_intent":"billing_issue","predicted_intent":"billing_issue","confidence":0.85}
+{"message":"I was charged for a cancelled order","true_intent":"billing_issue","predicted_intent":"refund","confidence":0.85}
+{"message":"I want to report a subscription issue","true_intent":"billing_issue","predicted_intent":"account_issue","confidence":0.75}
+{"message":"I want to report a subscription import","true_intent":"billing_issue","predicted_intent":"technical_issue","confidence":0.75}
+{"message":"I was charged for a service that was supposed to be free","true_intent":"billing_issue","predicted_intent":"billing_issue","confidence":0.85}
+{"message":"I was charged for a service I archived","true_intent":"billing_issue","predicted_intent":"billing_issue","confidence":0.85}
+{"message":"I want to report a subscription publish","true_intent":"billing_issue","predicted_intent":"refund","confidence":0.85}
+{"message":"I was charged for a premium feature I didn't select","true_intent":"billing_issue","predicted_intent":"billing_issue","confidence":0.85}
+{"message":"I was charged for a service I recovered","true_intent":"billing_issue","predicted_intent":"refund","confidence":0.85}
+{"message":"I want to report a subscription document","true_intent":"billing_issue","predicted_intent":"account_issue","confidence":0.75}
+{"message":"How do I contact the returns department?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.85}
+{"message":"How do I contact customer support?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.85}
+{"message":"How do I contact the billing support?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.75}
+{"message":"What is your policy on malfunctioning products?","true_intent":"general_query","predicted_intent":"technical_issue","confidence":0.85}
+{"message":"What is your return policy on my order #4521?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.95}
+{"message":"Can you price match this item?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.65}
+{"message":"How do I contact the customer care team?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.85}
+{"message":"How do I contact the service team?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.85}
+{"message":"What is your policy on restocking fees?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.85}
+{"message":"What is your policy on broken goods?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.75}
+{"message":"What is your policy on non-functional items?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.85}
+{"message":"What is your exchange policy?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.85}
+{"message":"How do I contact the billing hotline?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.85}
+{"message":"What is your policy on defective products?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.85}
+{"message":"What is your policy on faulty goods?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.85}
+{"message":"How do I contact the technical team?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.85}
+{"message":"How do I contact the vip support?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.75}
+{"message":"How do I request a replacement?","true_intent":"general_query","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"What are your business hours?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.85}
+{"message":"Do you ship the premium plan internationally?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.75}
+{"message":"How do I contact the service desk?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.85}
+{"message":"How do I contact the business support?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.85}
+{"message":"How do I contact the support hotline?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.85}
+{"message":"How do I contact the support team?","true_intent":"general_query","predicted_intent":"general_query","confidence":0.85}
+{"message":"How do I cancel a pending order?","true_intent":"general_query","predicted_intent":"delivery_issue","confidence":0.85}
+{"message":"I received a refund but it's alarming","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"I received a refund but it's concerning","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"I want a refund for the premium plan","true_intent":"refund","predicted_intent":"refund","confidence":0.95}
+{"message":"Can I get a refund for a subscription report?","true_intent":"refund","predicted_intent":"refund","confidence":0.95}
+{"message":"Can I get a refund for a bulk order?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Can I get a partial refund?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Can I get a refund for a late delivery?","true_intent":"refund","predicted_intent":"refund","confidence":0.75}
+{"message":"Can I get a refund for a service change?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"I received a refund but the amount is wrong","true_intent":"refund","predicted_intent":"refund","confidence":0.95}
+{"message":"Can I get a refund for a service download?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"I received a refund but it's unsettling","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Can I get a refund for a service note?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Can I get a refund for a subscription recovery?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"I received a refund but it's irritating","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Can I get a refund for a service publish?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Can I get a refund for a digital product?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Can I get a refund for a subscription publish?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Can I get a refund for a subscription trial?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Can I get a refund for a service save?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"I received a refund but it's worrying","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Can I get a refund for a service document?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"I received a refund but it's disturbing","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Can I get a refund for a service archive?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Can I get a refund for a monthly subscription?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Can I get a refund for shipping costs?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Can I get a refund for a service interruption?","true_intent":"refund","predicted_intent":"refund","confidence":0.75}
+{"message":"Can I get a refund for a service lapse?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Please refund my order, my subscription arrived damaged","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Can I get a refund for a subscription sync?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"I received a refund but it's problematic","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"I received a refund but it's not enough","true_intent":"refund","predicted_intent":"refund","confidence":0.85}
+{"message":"Can I get a refund for a subscription add-on?","true_intent":"refund","predicted_intent":"refund","confidence":0.85}

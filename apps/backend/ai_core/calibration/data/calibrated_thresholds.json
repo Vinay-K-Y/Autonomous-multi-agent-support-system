@@ -1,14 +1,14 @@
 {
-  "threshold": 1.0,
+  "threshold": 0.950001,
   "target_risk": 0.1,
   "delta": 0.05,
-  "calibration_set_size": 662,
+  "calibration_set_size": 467,
   "n_accepted_at_threshold": 0,
   "coverage": 0.0,
   "empirical_risk_at_threshold": 0.0,
   "risk_upper_bound_at_threshold": 0.0,
   "fallback_used": true,
   "fallback_reason": "No confidence threshold in the calibration set satisfies the target risk 0.1 at confidence level 0.95. Escalating everything until the underlying intent classifier improves or more calibration data is collected.",
-  "computed_at": "2026-08-14T18:40:51.794821+00:00",
-  "source_dataset": "ai_core/calibration/data/calibration_examples.jsonl"
+  "computed_at": "2026-08-15T16:33:12.783125+00:00",
+  "source_dataset": "ai_core/calibration/data/calibration_split_examples.jsonl"
 }
