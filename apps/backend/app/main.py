@@ -6,6 +6,7 @@ from app.routers.support import router as support_router
 from app.routers.health import router as health_router
 from app.routers.auth import router as auth_router
 from app.routers.feedback import router as feedback_router
+from app.routers.human_review import router as human_review_router
 from app.middleware.rate_limit import setup_rate_limiting
 from app.middleware.exceptions import setup_exception_handlers
 from app.db import engine, Base, database_available
@@ -86,3 +87,4 @@ app.include_router(health_router)
 app.include_router(support_router)
 app.include_router(auth_router)
 app.include_router(feedback_router)
+app.include_router(human_review_router)
