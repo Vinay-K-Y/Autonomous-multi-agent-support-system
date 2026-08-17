@@ -20,6 +20,9 @@ env/
 # Logs
 *.log
 
+# Calibration runtime data
+ai_core/calibration/data/outcome_log.jsonl
+
 # Pytest
 .pytest_cache/
 
